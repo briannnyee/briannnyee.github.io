@@ -1,0 +1,692 @@
+/* ============================================================
+   DREAMS.CSS — Life Objectives / Dream Page
+   ============================================================ */
+
+.dreams-page {
+  padding-top: calc(var(--nav-h) + 5rem);
+  padding-bottom: 8rem;
+  position: relative;
+}
+
+/* ── Star field background ──────────────────────────────── */
+.star-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star-field::before,
+.star-field::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 25%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80% 45%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 50%, rgba(252,238,9,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 40%, rgba(0,245,255,0.2) 0%, transparent 100%);
+  background-size: 600px 600px;
+  animation: starDrift 120s linear infinite;
+}
+
+.star-field::after {
+  background-size: 400px 400px;
+  animation-duration: 80s;
+  animation-direction: reverse;
+  opacity: 0.6;
+}
+
+@keyframes starDrift {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-400px); }
+}
+
+/* ── Page content above stars ───────────────────────────── */
+.dreams-page .container { position: relative; z-index: 1; }
+
+/* ── Header ─────────────────────────────────────────────── */
+.dreams-header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.dreams-header .section-label {
+  justify-content: center;
+  display: block;
+}
+
+.dreams-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--text);
+  margin: 0.5rem 0 1.5rem;
+}
+
+.dreams-title em {
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+  font-style: normal;
+}
+
+.dreams-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ── Dream cards ─────────────────────────────────────────── */
+.dream-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Single dream block ──────────────────────────────────── */
+.dream {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 460px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.dream:first-child { border-top: 1px solid var(--border); }
+
+/* Odd dreams: visual left, text right */
+.dream:nth-child(odd)  .dream__visual { order: 1; }
+.dream:nth-child(odd)  .dream__text   { order: 2; }
+
+/* Even dreams: text left, visual right */
+.dream:nth-child(even) .dream__visual { order: 2; }
+.dream:nth-child(even) .dream__text   { order: 1; }
+
+/* ── Visual panel ─────────────────────────────────────────── */
+.dream__visual {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg2);
+  min-height: 460px;
+}
+
+/* Hover shimmer on visual */
+.dream__visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(252,238,9,0.03) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.dream:hover .dream__visual::after {
+  transform: translateX(100%);
+}
+
+/* ── Moon visual ──────────────────────────────────────────── */
+.moon-scene {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.moon {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    #e8e8d0 0%,
+    #c8c8a8 30%,
+    #a0a080 60%,
+    #787860 85%,
+    #505040 100%
+  );
+  box-shadow:
+    0 0 40px rgba(232,232,208,0.3),
+    0 0 80px rgba(232,232,208,0.15),
+    0 0 160px rgba(232,232,208,0.06);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: moonFloat 6s ease-in-out infinite;
+}
+
+/* Crater details */
+.moon::before {
+  content: '';
+  position: absolute;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  top: 25%; left: 55%;
+  box-shadow:
+    20px 30px 0 -5px rgba(0,0,0,0.1),
+    -30px 50px 0 -8px rgba(0,0,0,0.08),
+    50px -10px 0 -10px rgba(0,0,0,0.12);
+}
+
+.moon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 70%,
+    rgba(0,0,0,0.2) 0%, transparent 50%
+  );
+}
+
+/* Astronaut figure */
+.astronaut {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px rgba(252,238,9,0.6));
+  animation: astronautBounce 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Earth in background */
+.earth {
+  position: absolute;
+  top: 8%; right: 8%;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%,
+    #1a6b9a 0%, #0d4d6e 40%, #0a3350 70%, #051a28 100%
+  );
+  box-shadow: 0 0 12px rgba(26,107,154,0.4);
+  opacity: 0.8;
+}
+
+.earth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(34,139,34,0.5) 0%, transparent 40%),
+    radial-gradient(ellipse at 65% 35%, rgba(34,139,34,0.4) 0%, transparent 30%);
+}
+
+@keyframes moonFloat {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50%       { transform: translate(-50%, -50%) translateY(-12px); }
+}
+
+@keyframes astronautBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-3deg); }
+  50%       { transform: translateX(-50%) translateY(-8px) rotate(3deg); }
+}
+
+/* ── Physical AI visual ──────────────────────────────────── */
+.robot-scene {
+  position: relative;
+  width: 200px;
+  height: 240px;
+}
+
+.robot-body {
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(160deg, var(--bg3) 0%, #1a1a1a 100%);
+  border: 1px solid rgba(0,245,255,0.3);
+  border-radius: 8px 8px 4px 4px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -30%);
+  box-shadow: 0 0 20px rgba(0,245,255,0.1), inset 0 0 20px rgba(0,245,255,0.05);
+}
+
+/* Robot chest panel */
+.robot-body::before {
+  content: '';
+  position: absolute;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  width: 44px; height: 36px;
+  border: 1px solid rgba(0,245,255,0.4);
+  background: rgba(0,245,255,0.06);
+  border-radius: 4px;
+}
+
+/* Pulsing core */
+.robot-body::after {
+  content: '';
+  position: absolute;
+  top: 32px; left: 50%;
+  transform: translateX(-50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: var(--glow-c);
+  animation: corePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes corePulse {
+  0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 0.4; transform: translateX(-50%) scale(0.7); }
+}
+
+.robot-head {
+  width: 56px;
+  height: 48px;
+  background: linear-gradient(160deg, #1a1a1a, #111);
+  border: 1px solid rgba(0,245,255,0.3);
+  border-radius: 6px;
+  position: absolute;
+  top: calc(50% - 30% - 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 16px rgba(0,245,255,0.1);
+}
+
+/* Eyes */
+.robot-head::before {
+  content: '';
+  position: absolute;
+  top: 14px; left: 9px;
+  width: 10px; height: 6px;
+  background: var(--cyan);
+  box-shadow: var(--glow-c), 18px 0 0 var(--cyan);
+  border-radius: 2px;
+  animation: eyeBlink 4s ease-in-out infinite;
+}
+
+@keyframes eyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95%            { transform: scaleY(0.1); }
+}
+
+/* Antenna */
+.robot-head::after {
+  content: '';
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 14px;
+  background: rgba(0,245,255,0.5);
+  box-shadow: 0 -4px 0 3px rgba(0,245,255,0.6), var(--glow-c);
+}
+
+/* Connection nodes floating around robot */
+.node {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: var(--glow-c);
+  animation: nodeOrbit linear infinite;
+}
+.node:nth-child(1) { animation-duration: 3s;  top: 20%; left: 20%; animation-delay: 0s; }
+.node:nth-child(2) { animation-duration: 4s;  top: 30%; right: 15%; animation-delay: -1s; }
+.node:nth-child(3) { animation-duration: 5s;  bottom: 25%; left: 18%; animation-delay: -2s; }
+.node:nth-child(4) { animation-duration: 3.5s;bottom: 20%; right: 20%; animation-delay: -0.5s; }
+
+@keyframes nodeOrbit {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50%       { transform: translateY(-10px) scale(1.3); opacity: 1; }
+}
+
+/* ── AI Infra visual ─────────────────────────────────────── */
+.infra-scene {
+  position: relative;
+  width: 240px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.server-rack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.server-unit {
+  width: 140px;
+  height: 22px;
+  background: linear-gradient(90deg, #0d0d0d, #1a1a1a);
+  border: 1px solid rgba(252,238,9,0.2);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 6px;
+}
+
+.server-unit::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--yellow);
+  box-shadow: var(--glow-y);
+}
+
+/* Activity light */
+.server-unit::after {
+  content: '';
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+  animation: serverBlink 1s step-end infinite;
+}
+
+.server-unit:nth-child(2)::after { animation-delay: 0.3s; background: var(--cyan); box-shadow: 0 0 4px var(--cyan); }
+.server-unit:nth-child(3)::after { animation-delay: 0.6s; }
+.server-unit:nth-child(4)::after { animation-delay: 0.1s; background: var(--yellow); box-shadow: 0 0 4px var(--yellow); }
+.server-unit:nth-child(5)::after { animation-delay: 0.8s; }
+.server-unit:nth-child(6)::after { animation-delay: 0.4s; background: var(--cyan); box-shadow: 0 0 4px var(--cyan); }
+
+@keyframes serverBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+.server-label {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Data flow line from rack */
+.data-flow {
+  position: absolute;
+  top: 50%; right: -40px;
+  width: 40px; height: 1px;
+  overflow: visible;
+}
+
+.data-packet {
+  position: absolute;
+  top: 0;
+  width: 8px; height: 2px;
+  background: var(--yellow);
+  box-shadow: var(--glow-y);
+  border-radius: 1px;
+  animation: packetFlow 1.2s linear infinite;
+  opacity: 0;
+}
+.data-packet:nth-child(2) { animation-delay: 0.4s; top: 8px; }
+.data-packet:nth-child(3) { animation-delay: 0.8s; top: -8px; }
+
+@keyframes packetFlow {
+  0%   { left: 0;    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Glow backdrop behind scenes */
+.dream__visual-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dream:hover .dream__visual-glow { opacity: 1; }
+
+.dream--moon   .dream__visual-glow { background: radial-gradient(ellipse at center, rgba(232,232,208,0.05) 0%, transparent 70%); }
+.dream--robot  .dream__visual-glow { background: radial-gradient(ellipse at center, rgba(0,245,255,0.05) 0%, transparent 70%); }
+.dream--infra  .dream__visual-glow { background: radial-gradient(ellipse at center, rgba(252,238,9,0.05) 0%, transparent 70%); }
+
+/* ── Text panel ──────────────────────────────────────────── */
+.dream__text {
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.dream__number {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dream__number::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: currentColor;
+}
+
+.dream__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  width: fit-content;
+}
+
+.dream__status--active  { color: var(--green);   border-color: rgba(57,255,20,0.4);   background: rgba(57,255,20,0.06); }
+.dream__status--queued  { color: var(--cyan);    border-color: rgba(0,245,255,0.4);   background: rgba(0,245,255,0.06); }
+.dream__status--lifetime{ color: var(--yellow);  border-color: rgba(252,238,9,0.4);   background: rgba(252,238,9,0.06); }
+
+.dream__status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: statusPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.dream__title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.dream__title em {
+  font-style: normal;
+  display: block;
+}
+
+.dream--moon  .dream__title em { color: #d4d4b8; text-shadow: 0 0 20px rgba(212,212,184,0.4); }
+.dream--robot .dream__title em { color: var(--cyan); text-shadow: var(--glow-c); }
+.dream--infra .dream__title em { color: var(--yellow); text-shadow: var(--glow-y); }
+
+.dream__desc {
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.75;
+  line-height: 1.85;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+
+.dream__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Divider line between panels ────────────────────────── */
+.dream__divider {
+  position: absolute;
+  top: 10%; bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  transform: translateX(-50%);
+}
+
+/* ── CTA at bottom ───────────────────────────────────────── */
+.dreams-cta {
+  margin-top: 6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dreams-cta__quote {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  max-width: 500px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.dreams-cta__quote strong {
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+  font-weight: normal;
+}
+
+/* ── Landing page teaser ─────────────────────────────────── */
+.dream-teaser {
+  margin-top: 4rem;
+  padding: 2rem 2.5rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  transition: border-color 0.3s;
+}
+
+.dream-teaser:hover {
+  border-color: rgba(252,238,9,0.3);
+}
+
+/* Animated shimmer */
+.dream-teaser::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(252,238,9,0.03), transparent);
+  transform: translateX(-100%);
+  animation: teaserShimmer 4s ease-in-out infinite;
+}
+
+@keyframes teaserShimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.dream-teaser__left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.dream-teaser__icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(252,238,9,0.4));
+  animation: moonFloat 6s ease-in-out infinite;
+}
+
+.dream-teaser__label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+  margin-bottom: 0.3rem;
+}
+
+.dream-teaser__title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .dream {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .dream:nth-child(odd)  .dream__visual,
+  .dream:nth-child(even) .dream__visual { order: 1; min-height: 280px; }
+
+  .dream:nth-child(odd)  .dream__text,
+  .dream:nth-child(even) .dream__text   { order: 2; padding: 2rem; }
+
+  .dream__divider { display: none; }
+  .dream__title { font-size: 1.8rem; }
+}
+
+@media (max-width: 600px) {
+  .dream-teaser {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
