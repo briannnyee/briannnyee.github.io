@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games — Ming-Han Lee</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/games.css">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">MHL<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="https://github.com/briannnyee" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav__mobile">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="blog.html">Blog</a>
+    <a href="games.html">Games</a>
+    <a href="https://github.com/briannnyee" target="_blank">GitHub ↗</a>
+  </div>
+
+  <main class="games-page container">
+
+    <!-- Save screen header -->
+    <div class="save-header fade-up">
+      <div class="save-header__top">
+        <div>
+          <div class="save-label">// SAVE_DATA.db — MING-HAN LEE</div>
+          <h1 class="save-title">GAME <span>LOG</span></h1>
+        </div>
+        <div class="save-stats">
+          <div class="save-stat">
+            <span class="save-stat__val" id="completed-count">0</span>
+            <span class="save-stat__key">Completed</span>
+          </div>
+          <div class="save-stat">
+            <span class="save-stat__val" id="total-count">0</span>
+            <span class="save-stat__key">Total</span>
+          </div>
+        </div>
+      </div>
+      <div class="save-progress">
+        <div class="save-progress__bar">
+          <div class="save-progress__fill" id="progress-fill"></div>
+        </div>
+        <span class="save-progress__label" id="progress-label">LOADING...</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="games-controls fade-up">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input
+          type="text"
+          id="game-search"
+          placeholder="Search games..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-row__label">Status:</span>
+        <button class="games-filter-btn active" data-status="all">All</button>
+        <button class="games-filter-btn" data-status="completed">Completed</button>
+        <button class="games-filter-btn" data-status="playing">Playing</button>
+        <button class="games-filter-btn" data-status="backlog">Backlog</button>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-row__label">Genre:</span>
+        <button class="games-filter-btn active" data-genre="all">All</button>
+        <button class="games-filter-btn" data-genre="RPG">RPG</button>
+        <button class="games-filter-btn" data-genre="Action RPG">Action RPG</button>
+        <button class="games-filter-btn" data-genre="Action">Action</button>
+        <button class="games-filter-btn" data-genre="Roguelike">Roguelike</button>
+      </div>
+    </div>
+
+    <!-- ── Featured Achievements ticker ── -->
+    <div class="achievements-section fade-up">
+      <div class="achievements-header">
+        <span class="section-label">// FEATURED_ACHIEVEMENTS</span>
+        <span class="ach-live-dot" aria-hidden="true"></span>
+      </div>
+      <div class="achievements-viewport">
+        <div class="achievements-track" id="achievements-track"></div>
+      </div>
+    </div>
+
+    <!-- Games grid (populated by JS) -->
+    <div class="games-grid" id="games-grid">
+      <div class="no-results" id="no-results">
+        <p>// NO_RESULTS_FOUND — try a different search</p>
+      </div>
+    </div>
+
+    <p style="margin-top:2rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); text-align:center; letter-spacing:0.1em;">
+      [ CLICK ANY CARD TO FLIP — HOVER FOR 3D EFFECT ]
+    </p>
+
+  </main>
+
+  <footer class="footer container">
+    <p class="footer__copy">© 2024 Ming-Han Lee &nbsp;|&nbsp; <span style="color:var(--yellow)">briannnyee.github.io</span></p>
+    <nav class="footer__links">
+      <a href="https://github.com/briannnyee" target="_blank">GitHub</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/glitch.js"></script>
+  <script src="js/games.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Ming-Han Lee</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">MHL<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="https://github.com/briannnyee" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav__mobile">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="blog.html">Blog</a>
+    <a href="games.html">Games</a>
+    <a href="https://github.com/briannnyee" target="_blank">GitHub ↗</a>
+  </div>
+
+  <!-- ── Page content ── -->
+  <main class="projects-page container">
+
+    <header class="section-header fade-up">
+      <span class="section-label">// PROJECTS.log</span>
+      <h1 class="section-title"><span class="slash-deco">/</span>What I've <em>Built</em></h1>
+      <div class="section-line"></div>
+    </header>
+
+    <!-- Filter -->
+    <div class="filter-bar fade-up" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="tools">Tools</button>
+      <button class="filter-btn" data-filter="ml">ML / AI</button>
+      <button class="filter-btn" data-filter="other">Other</button>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- Featured card -->
+      <article class="project-card project-card--featured fade-up" data-category="web"
+        style="--accent-color: var(--cyan)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">WEB / FEATURED</span>
+            <span class="card__year">2024</span>
+          </div>
+          <h2 class="card__title">Project Alpha</h2>
+          <p class="card__desc">
+            A full-stack web application that [describe what it does]. Built with a focus on performance and developer experience. Handles [X] users and processes [Y] requests per day. Replace this with your real project description.
+          </p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">React</span>
+            <span class="badge badge--cyan">TypeScript</span>
+            <span class="badge badge--yellow">Node.js</span>
+            <span class="badge badge--yellow">PostgreSQL</span>
+            <span class="badge badge--magenta">Docker</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+            <a href="#" class="btn btn--cyan btn--sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card fade-up" data-category="web"
+        style="--accent-color: var(--yellow)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">WEB APP</span>
+            <span class="card__year">2024</span>
+          </div>
+          <h2 class="card__title">DevTrack</h2>
+          <p class="card__desc">A developer productivity dashboard with real-time analytics, task tracking, and GitHub integration. Visualizes coding habits over time.</p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">Vue 3</span>
+            <span class="badge badge--yellow">FastAPI</span>
+            <span class="badge badge--yellow">Redis</span>
+            <span class="badge badge--magenta">Charts.js</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card fade-up" data-category="tools"
+        style="--accent-color: var(--magenta)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">CLI TOOL</span>
+            <span class="card__year">2023</span>
+          </div>
+          <h2 class="card__title">NightShell</h2>
+          <p class="card__desc">A customizable terminal theme manager with preset color schemes and font configuration. Supports iTerm2, Windows Terminal, and Alacritty.</p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">Python</span>
+            <span class="badge badge--yellow">Bash</span>
+            <span class="badge badge--magenta">PyPI</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card fade-up" data-category="ml"
+        style="--accent-color: var(--green)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">ML / AI</span>
+            <span class="card__year">2023</span>
+          </div>
+          <h2 class="card__title">SentimentScan</h2>
+          <p class="card__desc">Fine-tuned a BERT model for domain-specific sentiment analysis. Achieved 94% accuracy on a custom dataset of 50k reviews. Served via FastAPI.</p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">Python</span>
+            <span class="badge badge--yellow">PyTorch</span>
+            <span class="badge badge--yellow">Transformers</span>
+            <span class="badge badge--magenta">FastAPI</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card fade-up" data-category="web"
+        style="--accent-color: var(--cyan)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">WEB APP</span>
+            <span class="card__year">2023</span>
+          </div>
+          <h2 class="card__title">CollabBoard</h2>
+          <p class="card__desc">Real-time collaborative whiteboard with WebSocket sync, infinite canvas, and export-to-PDF. Supports multiple simultaneous users.</p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">React</span>
+            <span class="badge badge--cyan">WebSockets</span>
+            <span class="badge badge--yellow">Canvas API</span>
+            <span class="badge badge--magenta">Socket.io</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+            <a href="#" class="btn btn--cyan btn--sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card fade-up" data-category="other"
+        style="--accent-color: var(--yellow)">
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category">GAME / OTHER</span>
+            <span class="card__year">2022</span>
+          </div>
+          <h2 class="card__title">PixelRogue</h2>
+          <p class="card__desc">A browser-based roguelike built in a 72-hour game jam. Procedurally generated dungeons, turn-based combat, and 30+ enemy types.</p>
+          <div class="card__stack">
+            <span class="badge badge--cyan">JavaScript</span>
+            <span class="badge badge--yellow">HTML5 Canvas</span>
+            <span class="badge badge--magenta">Web Audio</span>
+          </div>
+          <div class="card__links">
+            <a href="https://github.com/briannnyee" target="_blank" class="btn btn--sm">GitHub</a>
+            <a href="#" class="btn btn--cyan btn--sm">Play ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /projects-grid -->
+
+    <!-- ── Achievements ── -->
+    <section class="achievements fade-up">
+      <div class="section-header">
+        <span class="section-label">// ACHIEVEMENTS.dat</span>
+        <h2 class="section-title">Unlocked <em>Milestones</em></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="achievements-list">
+        <div class="achievement-item">
+          <div class="achievement-icon">🏆</div>
+          <div class="achievement-body">
+            <div class="achievement-title">Hackathon Champion</div>
+            <div class="achievement-desc">First place at [Hackathon Name]. Built a full-stack app in 24 hours that [brief description].</div>
+            <div class="achievement-date">// 2024.03</div>
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🎓</div>
+          <div class="achievement-body">
+            <div class="achievement-title">Bachelor's Degree</div>
+            <div class="achievement-desc">Computer Science, [University Name]. Graduated with honors. GPA: X.X/4.0.</div>
+            <div class="achievement-date">// 2023.06</div>
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">⭐</div>
+          <div class="achievement-body">
+            <div class="achievement-title">Open Source Contributor</div>
+            <div class="achievement-desc">Contributed to [Project Name]. PR merged with 200+ stars. Improved performance by 30%.</div>
+            <div class="achievement-date">// 2023.11</div>
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">📜</div>
+          <div class="achievement-body">
+            <div class="achievement-title">AWS Certified</div>
+            <div class="achievement-desc">AWS Solutions Architect — Associate. Passed with a score of [XXX/1000].</div>
+            <div class="achievement-date">// 2023.08</div>
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🚀</div>
+          <div class="achievement-body">
+            <div class="achievement-title">Shipped to Production</div>
+            <div class="achievement-desc">Deployed first SaaS product to [X] paying users. Grew to [Y] users within 3 months.</div>
+            <div class="achievement-date">// 2024.01</div>
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">📝</div>
+          <div class="achievement-body">
+            <div class="achievement-title">Technical Writer</div>
+            <div class="achievement-desc">Published articles on Dev.to with [X]k+ views. Topics: [brief description].</div>
+            <div class="achievement-date">// 2023–2024</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer container">
+    <p class="footer__copy">© 2024 Ming-Han Lee &nbsp;|&nbsp; <span style="color:var(--yellow)">briannnyee.github.io</span></p>
+    <nav class="footer__links">
+      <a href="https://github.com/briannnyee" target="_blank">GitHub</a>
+      <a href="blog.html">Blog</a>
+      <a href="games.html">Games</a>
+    </nav>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/glitch.js"></script>
+  <script>
+    // Project filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
