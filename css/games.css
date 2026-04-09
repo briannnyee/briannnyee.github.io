@@ -43,8 +43,8 @@
 
 .save-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.5em;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--cyan);
   text-shadow: var(--glow-c);
@@ -86,8 +86,8 @@
 
 .save-stat__key {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -117,7 +117,7 @@
 
 .save-progress__label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -181,8 +181,8 @@
 
 .filter-row__label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
   margin-right: 0.5rem;
@@ -190,8 +190,8 @@
 
 .games-filter-btn {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.4rem 1rem;
   background: transparent;
@@ -299,8 +299,8 @@
 .game-card__status {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 2px 7px;
   margin-bottom: 0.5rem;
@@ -313,7 +313,7 @@
 
 .game-card__title {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -324,8 +324,8 @@
 
 .game-card__genre {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -381,10 +381,10 @@
 }
 
 .back__review {
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: var(--text);
-  opacity: 0.6;
-  line-height: 1.6;
+  opacity: 0.82;
+  line-height: 1.7;
   flex: 1;
   overflow: hidden;
 }
@@ -404,15 +404,15 @@
 
 .back__meta-key {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
 .back__meta-val {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--cyan);
 }
 
@@ -547,7 +547,7 @@
 
 .ach-title {
   font-family: var(--font-head);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -560,14 +560,14 @@
 
 .ach-game {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cyan);
 }
 
 .ach-desc {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;

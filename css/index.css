@@ -53,8 +53,8 @@
 
 .hero__eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
+  font-size: 0.82rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--cyan);
   text-shadow: var(--glow-c);
@@ -156,7 +156,7 @@
 
 #typewriter {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text);
   letter-spacing: 0.05em;
 }
@@ -211,8 +211,8 @@
 
 .stat__label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -432,10 +432,10 @@
 
 .about__text p {
   color: var(--text);
-  opacity: 0.8;
+  opacity: 0.88;
   margin-bottom: 1.2rem;
-  line-height: 1.8;
-  font-size: 1rem;
+  line-height: 1.9;
+  font-size: 1.05rem;
 }
 
 .about__skills {
@@ -463,8 +463,8 @@
 
 .about__card-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
   color: var(--muted);
   text-transform: uppercase;
   margin-bottom: 1.5rem;
@@ -491,14 +491,14 @@
 
 .about__stat-key {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--muted);
   text-transform: uppercase;
 }
 
 .about__stat-val {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: var(--cyan);
   text-shadow: var(--glow-c);
 }

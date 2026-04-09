@@ -17,8 +17,8 @@
 
 .filter-btn {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.5rem 1.25rem;
   background: transparent;
@@ -100,8 +100,8 @@
 
 .card__category {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent-color, var(--yellow));
   text-shadow: 0 0 8px var(--accent-color, var(--yellow));
@@ -109,13 +109,13 @@
 
 .card__year {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 
 .card__title {
   font-family: var(--font-head);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -125,10 +125,10 @@
 }
 
 .card__desc {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: var(--text);
-  opacity: 0.6;
-  line-height: 1.7;
+  opacity: 0.75;
+  line-height: 1.8;
   margin-bottom: 1.5rem;
   flex: 1;
 }
