@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "eyebrow": "PORTFOLIO_v2.0 — NIGHT CITY, 2077",
+    "typewriterPhrases": [
+      "Software Engineer",
+      "Full-Stack Developer",
+      "Cyberpunk 2077 Fan",
+      "Problem Solver",
+      "Builder of Cool Things"
+    ],
+    "stats": [
+      { "value": 12, "label": "Projects" },
+      { "value": 5,  "label": "Blog Posts" },
+      { "value": 50, "label": "Games Played" },
+      { "value": 3,  "label": "Years Coding" }
+    ]
+  },
+  "about": {
+    "bio": [
+      "Hey — I'm Ming-Han. A software engineer who loves turning complex problems into clean, functional systems. I build things for the web and beyond.",
+      "When I'm not writing code, I'm deep in a 100-hour RPG, reading about systems design, or thinking about what makes software genuinely elegant.",
+      "I believe the best code is like good storytelling — clear, purposeful, and leaves a lasting impression."
+    ],
+    "skills": [
+      { "label": "Python",     "color": "cyan"    },
+      { "label": "JavaScript", "color": "cyan"    },
+      { "label": "TypeScript", "color": "cyan"    },
+      { "label": "React",      "color": "yellow"  },
+      { "label": "Node.js",    "color": "yellow"  },
+      { "label": "SQL",        "color": "yellow"  },
+      { "label": "Docker",     "color": "magenta" },
+      { "label": "AWS",        "color": "magenta" },
+      { "label": "Git",        "color": "magenta" }
+    ],
+    "systemInfo": [
+      { "key": "STATUS",     "value": "● AVAILABLE",  "color": "green"   },
+      { "key": "LOCATION",   "value": "Taiwan / Remote"                   },
+      { "key": "ROLE",       "value": "Software Eng."                     },
+      { "key": "SPECIALTY",  "value": "Full-Stack"                        },
+      { "key": "COFFEE/DAY", "value": "TOO MANY",      "color": "magenta" },
+      { "key": "GITHUB",     "value": "@briannnyee",   "href": "https://github.com/briannnyee" }
+    ]
+  }
+}

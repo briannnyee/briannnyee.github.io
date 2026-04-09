@@ -1,48 +1,11 @@
-/* glitch.js — Typewriter + scroll fade-in */
+/* glitch.js — Scroll fade-in + counter animation
+   Typewriter is handled by js/load-index.js on the home page. */
 (function () {
 
-  // ── Typewriter ───────────────────────────────────────────
-  const el = document.getElementById('typewriter');
-  if (el) {
-    const phrases = [
-      'Software Engineer',
-      'Full-Stack Developer',
-      'Cyberpunk 2077 Fan',
-      'Problem Solver',
-      'Builder of Cool Things',
-    ];
-    let pIdx = 0, cIdx = 0, deleting = false;
-    const SPEED_TYPE = 80, SPEED_DEL = 45, PAUSE = 1800;
-
-    function tick() {
-      const phrase = phrases[pIdx];
-      if (!deleting) {
-        el.textContent = phrase.slice(0, cIdx + 1);
-        cIdx++;
-        if (cIdx === phrase.length) {
-          deleting = true;
-          setTimeout(tick, PAUSE);
-          return;
-        }
-        setTimeout(tick, SPEED_TYPE);
-      } else {
-        el.textContent = phrase.slice(0, cIdx - 1);
-        cIdx--;
-        if (cIdx === 0) {
-          deleting = false;
-          pIdx = (pIdx + 1) % phrases.length;
-          setTimeout(tick, 300);
-          return;
-        }
-        setTimeout(tick, SPEED_DEL);
-      }
-    }
-    setTimeout(tick, 800);
-  }
-
   // ── Scroll fade-up ───────────────────────────────────────
-  const fadeEls = document.querySelectorAll('.fade-up');
-  if (fadeEls.length) {
+  function setupFadeUps() {
+    const fadeEls = document.querySelectorAll('.fade-up');
+    if (!fadeEls.length) return;
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -55,7 +18,8 @@
   }
 
   // ── Counter animation ────────────────────────────────────
-  function animateCount(el, target, duration = 1500) {
+  function animateCount(el, target, duration) {
+    duration = duration || 1500;
     let start = null;
     const step = (ts) => {
       if (!start) start = ts;
@@ -68,14 +32,23 @@
     requestAnimationFrame(step);
   }
 
-  document.querySelectorAll('[data-count]').forEach(el => {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        animateCount(el, parseInt(el.dataset.count));
-        obs.disconnect();
-      }
-    }, { threshold: 0.5 });
-    obs.observe(el);
-  });
+  function setupCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          animateCount(el, parseInt(el.dataset.count));
+          obs.disconnect();
+        }
+      }, { threshold: 0.5 });
+      obs.observe(el);
+    });
+  }
+
+  // ── Expose for page loaders (e.g. load-index.js) ─────────
+  window.GlitchUtils = { setupCounters: setupCounters, animateCount: animateCount };
+
+  // ── Auto-init ────────────────────────────────────────────
+  setupFadeUps();
+  setupCounters();
 
 })();

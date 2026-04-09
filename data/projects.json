@@ -1,0 +1,113 @@
+[
+  {
+    "id": "alpha",
+    "featured": true,
+    "category": "web",
+    "categoryLabel": "WEB / FEATURED",
+    "year": "2024",
+    "title": "Project Alpha",
+    "desc": "A full-stack web application that [describe what it does]. Built with a focus on performance and developer experience. Handles [X] users and processes [Y] requests per day. Replace this with your real project description.",
+    "stack": [
+      { "label": "React",      "color": "cyan"    },
+      { "label": "TypeScript", "color": "cyan"    },
+      { "label": "Node.js",    "color": "yellow"  },
+      { "label": "PostgreSQL", "color": "yellow"  },
+      { "label": "Docker",     "color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub",     "href": "https://github.com/briannnyee", "variant": ""         },
+      { "label": "Live Demo ↗","href": "#",                              "variant": "btn--cyan" }
+    ],
+    "accentColor": "var(--cyan)"
+  },
+  {
+    "id": "devtrack",
+    "category": "web",
+    "categoryLabel": "WEB APP",
+    "year": "2024",
+    "title": "DevTrack",
+    "desc": "A developer productivity dashboard with real-time analytics, task tracking, and GitHub integration. Visualizes coding habits over time.",
+    "stack": [
+      { "label": "Vue 3",    "color": "cyan"    },
+      { "label": "FastAPI",  "color": "yellow"  },
+      { "label": "Redis",    "color": "yellow"  },
+      { "label": "Charts.js","color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
+    ],
+    "accentColor": "var(--yellow)"
+  },
+  {
+    "id": "nightshell",
+    "category": "tools",
+    "categoryLabel": "CLI TOOL",
+    "year": "2023",
+    "title": "NightShell",
+    "desc": "A customizable terminal theme manager with preset color schemes and font configuration. Supports iTerm2, Windows Terminal, and Alacritty.",
+    "stack": [
+      { "label": "Python", "color": "cyan"    },
+      { "label": "Bash",   "color": "yellow"  },
+      { "label": "PyPI",   "color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
+    ],
+    "accentColor": "var(--magenta)"
+  },
+  {
+    "id": "sentimentscan",
+    "category": "ml",
+    "categoryLabel": "ML / AI",
+    "year": "2023",
+    "title": "SentimentScan",
+    "desc": "Fine-tuned a BERT model for domain-specific sentiment analysis. Achieved 94% accuracy on a custom dataset of 50k reviews. Served via FastAPI.",
+    "stack": [
+      { "label": "Python",       "color": "cyan"    },
+      { "label": "PyTorch",      "color": "yellow"  },
+      { "label": "Transformers", "color": "yellow"  },
+      { "label": "FastAPI",      "color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
+    ],
+    "accentColor": "var(--green)"
+  },
+  {
+    "id": "collabboard",
+    "category": "web",
+    "categoryLabel": "WEB APP",
+    "year": "2023",
+    "title": "CollabBoard",
+    "desc": "Real-time collaborative whiteboard with WebSocket sync, infinite canvas, and export-to-PDF. Supports multiple simultaneous users.",
+    "stack": [
+      { "label": "React",      "color": "cyan"    },
+      { "label": "WebSockets", "color": "cyan"    },
+      { "label": "Canvas API", "color": "yellow"  },
+      { "label": "Socket.io",  "color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub",     "href": "https://github.com/briannnyee", "variant": ""         },
+      { "label": "Live Demo ↗","href": "#",                              "variant": "btn--cyan" }
+    ],
+    "accentColor": "var(--cyan)"
+  },
+  {
+    "id": "pixelrogue",
+    "category": "other",
+    "categoryLabel": "GAME / OTHER",
+    "year": "2022",
+    "title": "PixelRogue",
+    "desc": "A browser-based roguelike built in a 72-hour game jam. Procedurally generated dungeons, turn-based combat, and 30+ enemy types.",
+    "stack": [
+      { "label": "JavaScript",  "color": "cyan"    },
+      { "label": "HTML5 Canvas","color": "yellow"  },
+      { "label": "Web Audio",   "color": "magenta" }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": ""         },
+      { "label": "Play ↗",  "href": "#",                             "variant": "btn--cyan" }
+    ],
+    "accentColor": "var(--yellow)"
+  }
+]

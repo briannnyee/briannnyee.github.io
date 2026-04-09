@@ -46,144 +46,29 @@
 
     <div class="blog-layout">
 
-      <!-- ── Post list ── -->
-      <div class="post-list">
-
-        <!-- Featured post -->
-        <article class="post-card post-card--featured fade-up">
-          <div class="featured-label">FEATURED POST</div>
-          <div class="post-card__meta">
-            <span class="post-card__date">2024.11.15</span>
-            <span class="post-card__readtime">12 MIN READ</span>
-            <div class="post-card__tags">
-              <span class="badge badge--yellow">Engineering</span>
-              <span class="badge badge--cyan">Systems</span>
-            </div>
-          </div>
-          <h2 class="post-card__title">Why I Think About System Design Like a Game Designer</h2>
-          <p class="post-card__excerpt">
-            After spending hundreds of hours in complex RPGs, I noticed something: the best game systems and the best software systems share a surprising amount of DNA. Both require elegant constraint, emergent behavior, and deep respect for the user's time. Here's what Elden Ring taught me about API design.
-          </p>
-          <a href="#" class="post-card__link">Read Article</a>
-        </article>
-
-        <!-- Regular posts -->
-        <article class="post-card fade-up">
-          <div class="post-card__meta">
-            <span class="post-card__date">2024.10.03</span>
-            <span class="post-card__readtime">8 MIN READ</span>
-            <div class="post-card__tags">
-              <span class="badge badge--cyan">React</span>
-              <span class="badge badge--yellow">Performance</span>
-            </div>
-          </div>
-          <h2 class="post-card__title">The Hidden Cost of useEffect: A Deep Dive</h2>
-          <p class="post-card__excerpt">
-            Most React developers use useEffect daily without fully understanding its execution model. After profiling several production apps, I found that misused effects were responsible for some of the most subtle and painful bugs I've ever encountered. Let's fix that.
-          </p>
-          <a href="#" class="post-card__link">Read Article</a>
-        </article>
-
-        <article class="post-card fade-up">
-          <div class="post-card__meta">
-            <span class="post-card__date">2024.08.22</span>
-            <span class="post-card__readtime">6 MIN READ</span>
-            <div class="post-card__tags">
-              <span class="badge badge--magenta">Career</span>
-              <span class="badge badge--yellow">Reflection</span>
-            </div>
-          </div>
-          <h2 class="post-card__title">What I Learned From Shipping Something Nobody Used</h2>
-          <p class="post-card__excerpt">
-            I spent three months building a product that got zero traction. Here's what I learned about validation, assumptions, and why "build it and they will come" is the most dangerous lie in software.
-          </p>
-          <a href="#" class="post-card__link">Read Article</a>
-        </article>
-
-        <article class="post-card fade-up">
-          <div class="post-card__meta">
-            <span class="post-card__date">2024.06.10</span>
-            <span class="post-card__readtime">5 MIN READ</span>
-            <div class="post-card__tags">
-              <span class="badge badge--cyan">Python</span>
-              <span class="badge badge--cyan">Tools</span>
-            </div>
-          </div>
-          <h2 class="post-card__title">Building a Personal CLI That Actually Gets Used</h2>
-          <p class="post-card__excerpt">
-            I've tried and abandoned dozens of productivity tools. The only ones that stick are the ones I build myself. Here's my approach to building CLI tools that become indispensable parts of your workflow.
-          </p>
-          <a href="#" class="post-card__link">Read Article</a>
-        </article>
-
-        <article class="post-card fade-up">
-          <div class="post-card__meta">
-            <span class="post-card__date">2024.04.05</span>
-            <span class="post-card__readtime">10 MIN READ</span>
-            <div class="post-card__tags">
-              <span class="badge badge--yellow">AI/ML</span>
-              <span class="badge badge--magenta">Opinion</span>
-            </div>
-          </div>
-          <h2 class="post-card__title">The Honest Engineer's Guide to Using AI Tools</h2>
-          <p class="post-card__excerpt">
-            There's a lot of noise around AI coding tools. After a year of daily use, here's my honest take on what they're genuinely good at, where they fail, and how I've restructured my workflow around their actual strengths and weaknesses.
-          </p>
-          <a href="#" class="post-card__link">Read Article</a>
-        </article>
-
-        <div class="blog-more fade-up">
-          <a href="#" class="btn">[ LOAD MORE POSTS ]</a>
-        </div>
-
-      </div><!-- /post-list -->
+      <!-- Post list — populated by load-blog.js -->
+      <div class="post-list" id="post-list"></div>
 
       <!-- ── Sidebar ── -->
       <aside class="blog-sidebar fade-up">
 
         <div class="sidebar-block sidebar-about">
           <div class="sidebar-block__title">// ABOUT_ME</div>
-          <p>I'm Ming-Han, a software engineer who writes about engineering, career lessons, and occasionally what I'm playing.</p>
-          <p>I aim to write things that are honest and technically useful.</p>
+          <!-- populated by load-blog.js -->
+          <p id="sidebar-about-text"></p>
           <a href="index.html" class="btn btn--sm" style="margin-top:0.5rem">About Me ↗</a>
         </div>
 
         <div class="sidebar-block">
           <div class="sidebar-block__title">// TOPICS</div>
-          <div class="tag-cloud">
-            <span class="tag-pill">Engineering</span>
-            <span class="tag-pill">React</span>
-            <span class="tag-pill">Python</span>
-            <span class="tag-pill">Career</span>
-            <span class="tag-pill">Systems</span>
-            <span class="tag-pill">AI/ML</span>
-            <span class="tag-pill">Performance</span>
-            <span class="tag-pill">Tools</span>
-            <span class="tag-pill">Opinion</span>
-            <span class="tag-pill">Games</span>
-          </div>
+          <!-- populated by load-blog.js -->
+          <div class="tag-cloud" id="sidebar-topics"></div>
         </div>
 
         <div class="sidebar-block">
           <div class="sidebar-block__title">// RECENT_POSTS</div>
-          <div class="recent-list">
-            <div class="recent-item">
-              <span class="recent-item__title">Why I Think About System Design Like a Game Designer</span>
-              <span class="recent-item__date">2024.11.15</span>
-            </div>
-            <div class="recent-item">
-              <span class="recent-item__title">The Hidden Cost of useEffect</span>
-              <span class="recent-item__date">2024.10.03</span>
-            </div>
-            <div class="recent-item">
-              <span class="recent-item__title">What I Learned From Shipping Nothing</span>
-              <span class="recent-item__date">2024.08.22</span>
-            </div>
-            <div class="recent-item">
-              <span class="recent-item__title">Building a Personal CLI That Gets Used</span>
-              <span class="recent-item__date">2024.06.10</span>
-            </div>
-          </div>
+          <!-- populated by load-blog.js -->
+          <div class="recent-list" id="sidebar-recent"></div>
         </div>
 
       </aside>
@@ -203,5 +88,6 @@
 
   <script src="js/nav.js"></script>
   <script src="js/glitch.js"></script>
+  <script src="js/load-blog.js"></script>
 </body>
 </html>

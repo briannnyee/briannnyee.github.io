@@ -68,30 +68,13 @@
           <a href="blog.html" class="btn btn--cyan">[ READ BLOG ]</a>
         </div>
 
-        <div class="hero__stats fade-up">
-          <div class="stat">
-            <span class="stat__value" data-count="12">0</span>
-            <span class="stat__label">Projects</span>
-          </div>
-          <div class="stat">
-            <span class="stat__value" data-count="5">0</span>
-            <span class="stat__label">Blog Posts</span>
-          </div>
-          <div class="stat">
-            <span class="stat__value" data-count="50">0</span>
-            <span class="stat__label">Games Played</span>
-          </div>
-          <div class="stat">
-            <span class="stat__value" data-count="3">0</span>
-            <span class="stat__label">Years Coding</span>
-          </div>
-        </div>
+        <!-- Stats — populated by load-index.js -->
+        <div class="hero__stats fade-up" id="hero-stats"></div>
       </div>
 
       <!-- Right: photo -->
       <div class="hero__photo-wrap fade-up">
         <div class="hero__photo-frame">
-          <!-- Replace src with your photo path, e.g. assets/photo.jpg -->
           <img
             src="assets/photo.jpg"
             alt="Ming-Han Lee"
@@ -103,7 +86,6 @@
             <span class="placeholder-text">PHOTO.jpg</span>
             <span class="placeholder-sub">Replace assets/photo.jpg</span>
           </div>
-          <!-- Cyberpunk overlay accents -->
           <div class="photo-scan" aria-hidden="true"></div>
           <div class="photo-corner photo-corner--tl" aria-hidden="true"></div>
           <div class="photo-corner photo-corner--tr" aria-hidden="true"></div>
@@ -129,53 +111,19 @@
         <h2 class="section-title">Building the <em>Future</em>,<br>One Line at a Time</h2>
         <div class="section-line" style="margin-bottom:2rem"></div>
 
-        <p>Hey — I'm Ming-Han. A software engineer who loves turning complex problems into clean, functional systems. I build things for the web and beyond.</p>
-        <p>When I'm not writing code, I'm deep in a 100-hour RPG, reading about systems design, or thinking about what makes software genuinely elegant.</p>
-        <p>I believe the best code is like good storytelling — clear, purposeful, and leaves a lasting impression.</p>
+        <!-- Bio paragraphs — populated by load-index.js -->
+        <div id="about-bio"></div>
 
-        <div class="about__skills">
-          <span class="badge badge--cyan">Python</span>
-          <span class="badge badge--cyan">JavaScript</span>
-          <span class="badge badge--cyan">TypeScript</span>
-          <span class="badge badge--yellow">React</span>
-          <span class="badge badge--yellow">Node.js</span>
-          <span class="badge badge--yellow">SQL</span>
-          <span class="badge badge--magenta">Docker</span>
-          <span class="badge badge--magenta">AWS</span>
-          <span class="badge badge--magenta">Git</span>
-        </div>
+        <!-- Skills — populated by load-index.js -->
+        <div class="about__skills" id="about-skills"></div>
       </div>
 
       <div class="about__visual fade-up">
         <div class="about__card corner-box">
           <div class="about__card-label">SYSTEM INFO</div>
 
-          <div class="about__stat-row">
-            <span class="about__stat-key">STATUS</span>
-            <span class="about__stat-val" style="color:var(--green)">● AVAILABLE</span>
-          </div>
-          <div class="about__stat-row">
-            <span class="about__stat-key">LOCATION</span>
-            <span class="about__stat-val">Taiwan / Remote</span>
-          </div>
-          <div class="about__stat-row">
-            <span class="about__stat-key">ROLE</span>
-            <span class="about__stat-val">Software Eng.</span>
-          </div>
-          <div class="about__stat-row">
-            <span class="about__stat-key">SPECIALTY</span>
-            <span class="about__stat-val">Full-Stack</span>
-          </div>
-          <div class="about__stat-row">
-            <span class="about__stat-key">COFFEE/DAY</span>
-            <span class="about__stat-val" style="color:var(--magenta)">TOO MANY</span>
-          </div>
-          <div class="about__stat-row">
-            <span class="about__stat-key">GITHUB</span>
-            <span class="about__stat-val">
-              <a href="https://github.com/briannnyee" target="_blank" style="color:var(--cyan)">@briannnyee</a>
-            </span>
-          </div>
+          <!-- System info rows — populated by load-index.js -->
+          <div id="about-system-info"></div>
         </div>
       </div>
     </div>
@@ -208,5 +156,6 @@
 
   <script src="js/nav.js"></script>
   <script src="js/glitch.js"></script>
+  <script src="js/load-index.js"></script>
 </body>
 </html>
