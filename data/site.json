@@ -2,43 +2,42 @@
   "hero": {
     "eyebrow": "PORTFOLIO_v2.0 — NIGHT CITY, 2077",
     "typewriterPhrases": [
-      "Software Engineer",
-      "Full-Stack Developer",
-      "Cyberpunk 2077 Fan",
-      "Problem Solver",
-      "Builder of Cool Things"
+      "Frontier Physical AI",
+      "Learning-Based Robotics Control",
+      "Distributed System",
+      "ML Infrastructure",
+      "System Optimization"
     ],
     "stats": [
       { "value": 12, "label": "Projects" },
       { "value": 5,  "label": "Blog Posts" },
       { "value": 50, "label": "Games Played" },
-      { "value": 3,  "label": "Years Coding" }
+      { "value": 5,  "label": "Years Coding" }
     ]
   },
   "about": {
     "bio": [
-      "Hey — I'm Ming-Han. A software engineer who loves turning complex problems into clean, functional systems. I build things for the web and beyond.",
-      "When I'm not writing code, I'm deep in a 100-hour RPG, reading about systems design, or thinking about what makes software genuinely elegant.",
-      "I believe the best code is like good storytelling — clear, purposeful, and leaves a lasting impression."
-    ],
+      "Hi, I'm Ming-Han Lee, a Research Engineer specializing in the intersection of Machine Learning, Distributed Systems, and Robotics. I earned my Master's degree from ETH Zurich, where my work focused on the architectural synergy between Machine Learning, Systems, and Learning-Based Robotic Control. My core research interest lies in bridging the gap between high-level algorithms and low-level system performance, ensuring that complex intelligence can thrive within the millisecond-level constraints of real-world robotics.",
+      "Professionally, I interned at the Robotics and AI Institute (RAI), where I advanced research in model-based reinforcement learning while completing my master's thesis. I also served at Robotic Systems Lab, specializing in re-architecting frontier model pipelines and successfully deploying high-performance algorithms under rigorous real-time constraints.",
+      "Outside the lab, I'm a completionist gamer with a deep appreciation for world-building. I'm driven by the challenge of transforming digital inspiration into tangible reality, turning what was once \"only fantasy\" into the future we inhabit."    ], 
     "skills": [
-      { "label": "Python",     "color": "cyan"    },
-      { "label": "JavaScript", "color": "cyan"    },
-      { "label": "TypeScript", "color": "cyan"    },
-      { "label": "React",      "color": "yellow"  },
-      { "label": "Node.js",    "color": "yellow"  },
-      { "label": "SQL",        "color": "yellow"  },
-      { "label": "Docker",     "color": "magenta" },
-      { "label": "AWS",        "color": "magenta" },
-      { "label": "Git",        "color": "magenta" }
+      { "label": "Machine Learning",     "color": "cyan"    },
+      { "label": "Reinforcement Learning", "color": "cyan"    },
+      { "label": "Neural Architectures", "color": "cyan"    },
+      { "label": "Learning-Based Robotics Control",      "color": "yellow"  },
+      { "label": "ROS2 Architecture",    "color": "yellow"  },
+      { "label": "Real-time System Optimization",        "color": "yellow"  },
+      { "label": "Distributed Systems",     "color": "magenta" },
+      { "label": "ML Infrastructures",        "color": "magenta" },
+      { "label": "Parallel Training",        "color": "magenta" }
     ],
     "systemInfo": [
       { "key": "STATUS",     "value": "● AVAILABLE",  "color": "green"   },
-      { "key": "LOCATION",   "value": "Taiwan / Remote"                   },
-      { "key": "ROLE",       "value": "Software Eng."                     },
-      { "key": "SPECIALTY",  "value": "Full-Stack"                        },
-      { "key": "COFFEE/DAY", "value": "TOO MANY",      "color": "magenta" },
-      { "key": "GITHUB",     "value": "@briannnyee",   "href": "https://github.com/briannnyee" }
+      { "key": "LOCATION",   "value": "Zurich"},
+      { "key": "ROLE",       "value": "Software Eng."},
+      { "key": "SPECIALTY",  "value": "AI & Robotics"},
+      { "key": "TEA/DAY", "value": "TOO MANY","color": "magenta" },
+      { "key": "GITHUB",     "value": "@briannnyee","href": "https://github.com/briannnyee" }
     ]
   }
 }
