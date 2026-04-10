@@ -1,42 +1,67 @@
 [
   {
-    "year": "2024",
+    "year": "2026",
+    "entries": [
+      {
+        "side": "left",
+        "category": "education",
+        "icon": "🗞",
+        "date": "2026.01",
+        "categoryLabel": "Education",
+        "title": "Towards Dynamics-Aware Continual RL for Real-World Robot Learning",
+        "org": "Robotics and AI Institute x ETH Zürich",
+        "body": [
+          "Completed my master thesis in collaboration with RAI and ETHZ."
+        ],
+        "tags": [
+          { "label": "Isaac Lab",          "color": "magenta" },
+          { "label": "Reinforcement Learning",        "color": "magenta" },
+          { "label": "Robot Dynamics", "color": "magenta" }
+        ]
+      }
+    ]
+  },
+  {
+    "year": "2025",
     "entries": [
       {
         "side": "right",
-        "category": "award",
-        "icon": "🏆",
-        "date": "2024.03",
-        "categoryLabel": "Award",
-        "title": "Hackathon Champion",
-        "org": "[Hackathon Name] · [City]",
+        "category": "work",
+        "icon": "🤖",
+        "date": "2025.06 - 2026.01",
+        "categoryLabel": "Work",
+        "title": "Research Engineer Intern",
+        "org": "Robotics and AI Institute",
         "body": [
-          "First place out of <mark class=\"hl\">48 competing teams</mark>. Built a full-stack app in <mark class=\"hl--cyan\">24 hours</mark> that [brief description of what it solved]. Judged on technical execution, UX, and real-world impact.",
-          "Read the <a href=\"#\" target=\"_blank\" rel=\"noopener\">project write-up ↗</a> or view the <a href=\"https://github.com/briannnyee\" target=\"_blank\" rel=\"noopener\">source code on GitHub ↗</a>."
+          "Started my role as Research Engineer Intern and contributed to the research in model-based reinforcement learning."
         ],
         "tags": [
-          { "label": "Full-Stack",  "color": "yellow"  },
-          { "label": "React",       "color": "cyan"    },
-          { "label": "24h Build",   "color": "magenta" }
+          { "label": "Isaac Lab",          "color": "green" },
+          { "label": "Reinforcement Learning",        "color": "green" },
+          { "label": "Robot Dynamics", "color": "green" }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "year": "2024",
+    "entries": [
       {
         "side": "left",
-        "category": "launch",
-        "icon": "🚀",
-        "date": "2024.01",
-        "categoryLabel": "Launch",
-        "title": "First SaaS Product Shipped",
-        "org": "[Product Name] · Independent",
+        "category": "education",
+        "icon": "🚜",
+        "date": "2024.10 - 2025.04",
+        "categoryLabel": "Education",
+        "title": "Efficient Learning On-Site: A Model-Based RL Approach for HEAP",
+        "org": "ETH Zürich · Zürich",
         "body": [
-          "Deployed the first version of [Product Name] and reached <mark class=\"hl\">[X] paying users</mark> within the first week. Grew to <mark class=\"hl--green\">[Y] users</mark> in 3 months with zero ad spend.",
-          "Built end-to-end solo: backend, frontend, payments via <a href=\"https://stripe.com\" target=\"_blank\" rel=\"noopener\">Stripe ↗</a>, and infrastructure on AWS. <a href=\"#\" target=\"_blank\" rel=\"noopener\">Visit the product ↗</a>"
+          "Being the first ever to successfully deploy and train TD-MPC2 policy directly on-site on the heavy excavator - HEAP - to perform complex tasks."
         ],
         "tags": [
-          { "label": "Node.js", "color": "cyan"   },
-          { "label": "React",   "color": "cyan"   },
-          { "label": "AWS",     "color": "yellow" },
-          { "label": "Stripe",  "color": "yellow" }
+          { "label": "Robotics",          "color": "magenta" },
+          { "label": "ROS2",          "color": "magenta" },
+          { "label": "Reinforcement Learning",        "color": "magenta" },
+          { "label": "System Optimization", "color": "magenta" }
         ]
       }
     ]
@@ -47,71 +72,56 @@
       {
         "side": "right",
         "category": "education",
-        "icon": "🎓",
-        "date": "2023.06",
+        "icon": "📜",
+        "date": "2023.09",
         "categoryLabel": "Education",
-        "title": "Bachelor's Degree — Computer Science",
-        "org": "[University Name] · [City]",
+        "title": "Beginning of Master's Degree",
+        "org": "ETH Zürich · Zürich",
         "body": [
-          "Graduated with <mark class=\"hl\">honors</mark>, GPA <mark class=\"hl\">X.X / 4.0</mark>. Thesis: <em>\"[Your Thesis Title]\"</em> — supervised by <a href=\"#\" target=\"_blank\" rel=\"noopener\">Prof. [Name] ↗</a>.",
-          "Relevant coursework: Algorithms, Distributed Systems, Machine Learning, Compilers. Member of the <a href=\"#\" rel=\"noopener\">ACM Student Chapter ↗</a>."
+          "Started my pursue of master's degree in computer science. Majoring in Machine Intelligence with a minor in Data Management Systems."
         ],
         "tags": [
-          { "label": "Computer Science", "color": "cyan" },
-          { "label": "Honors",           "color": "cyan" }
+          { "label": "Machine Intelligence",          "color": "magenta" },
+          { "label": "Data Management Systems",        "color": "magenta" },
+          { "label": "Deep Tech", "color": "magenta" }
         ]
       },
       {
         "side": "left",
-        "category": "cert",
-        "icon": "📜",
-        "date": "2023.08",
-        "categoryLabel": "Certification",
-        "title": "AWS Solutions Architect — Associate",
-        "org": "Amazon Web Services",
+        "category": "education",
+        "icon": "🎓",
+        "date": "2023.01",
+        "categoryLabel": "Education",
+        "title": "Bachelor's Degree",
+        "org": "National Taiwan University · Taipei",
         "body": [
-          "Passed with a score of <mark class=\"hl\">[XXX] / 1000</mark>. Covers cloud architecture design, high availability, fault tolerance, and cost optimization on AWS.",
-          "Verify credential: <a href=\"#\" target=\"_blank\" rel=\"noopener\">Credly badge ↗</a> &nbsp;·&nbsp; <a href=\"https://aws.amazon.com/certification/certified-solutions-architect-associate/\" target=\"_blank\" rel=\"noopener\">About the cert ↗</a>"
+          "Graduated with <mark class=\"hl\">3 Times Dean's Award</mark>, GPA <mark class=\"hl\">4.09 / 4.30</mark>. Thesis: <em>\"Letter You: An Afterlife Time Capsule Service\"</em> — supervised by <a href=\"https://management.ntu.edu.tw/en/IM/faculty/teacher/sn/9\" target=\"_blank\" rel=\"noopener\">Prof. Seng-Cho Chou ↗</a>."
         ],
         "tags": [
-          { "label": "AWS",          "color": "magenta" },
-          { "label": "Cloud",        "color": "magenta" },
-          { "label": "Architecture", "color": "magenta" }
+          { "label": "Information Management", "color": "cyan" },
+          { "label": "Honors",           "color": "cyan" }
         ]
       },
       {
         "side": "right",
         "category": "work",
         "icon": "💼",
-        "date": "2023.07 – Present",
+        "date": "2022.10 - 2023.03",
         "categoryLabel": "Work",
-        "title": "Software Engineer",
-        "org": "[Company Name] · [City / Remote]",
+        "title": "Software Engineer - Backend",
+        "org": "Lootex · Taipei",
         "body": [
-          "Working on [brief description of team/product]. Key contributions: [what you shipped], improving <mark class=\"hl--cyan\">system performance by [X]%</mark> and reducing latency from [A]ms to <mark class=\"hl\">[B]ms</mark>.",
-          "Stack: [Tech 1], [Tech 2], [Tech 3]. Learn more at <a href=\"#\" target=\"_blank\" rel=\"noopener\">[company].com ↗</a>."
+          "Worked on NFT marketplace on EVM-based chains and Sui.",
+          "Key contributions: developed core infrastructure - \"Event Poller\", a real-time on-chain event monitoring system, reducing <mark class=\"hl--cyan\">third-party API usage by 100%</mark>.",
+          "On Apr 04 2026, Lootex has completed her mission and embarked on next journey. Learn more at <a href=\"https://lootex.io/\" target=\"_blank\" rel=\"noopener\">lootex.io ↗</a>. The public can now access Lootex's source code at <a href=\"https://github.com/lootex-io/lootex-core\" target=\"_blank\" rel=\"noopener\">lootex-core↗</a>.",
+          "Stack: NestJS, EVM (Ethereum Virtual Machine), Sui Move."
         ],
         "tags": [
           { "label": "Full-Time", "color": "green" },
-          { "label": "[Tech 1]",  "color": "cyan"  },
-          { "label": "[Tech 2]",  "color": "cyan"  }
-        ]
-      },
-      {
-        "side": "left",
-        "category": "award",
-        "icon": "⭐",
-        "date": "2023.11",
-        "categoryLabel": "Award",
-        "title": "Open Source Contribution Merged",
-        "org": "[Project Name] · GitHub",
-        "body": [
-          "PR merged into <a href=\"#\" target=\"_blank\" rel=\"noopener\">[Project Name] ↗</a>, a project with <mark class=\"hl\">200+ GitHub stars</mark>. The change [brief description] improved <mark class=\"hl--cyan\">performance by ~30%</mark> in [specific scenario].",
-          "<a href=\"#\" target=\"_blank\" rel=\"noopener\">View the pull request ↗</a>"
-        ],
-        "tags": [
-          { "label": "Open Source", "color": "yellow" },
-          { "label": "Performance", "color": "yellow" }
+          { "label": "Node.js",  "color": "green"  },
+          { "label": "Typescript",  "color": "green"  },
+          { "label": "EVM",  "color": "green"  },
+          { "label": "Seaport Protocol",  "color": "green"  }
         ]
       }
     ]
@@ -119,42 +129,6 @@
   {
     "year": "2022",
     "entries": [
-      {
-        "side": "right",
-        "category": "work",
-        "icon": "🖥️",
-        "date": "2022.06 – 2022.09",
-        "categoryLabel": "Work",
-        "title": "Software Engineering Intern",
-        "org": "[Company Name] · [City]",
-        "body": [
-          "Summer internship on the [team name] team. Built <mark class=\"hl\">[feature name]</mark> — shipped to production in 10 weeks, used by <mark class=\"hl--cyan\">[X]k users</mark>.",
-          "Presented work at the company-wide intern demo day to an audience of <mark class=\"hl\">200+ engineers</mark>. <a href=\"#\" target=\"_blank\" rel=\"noopener\">See the project ↗</a>"
-        ],
-        "tags": [
-          { "label": "Internship", "color": "green" },
-          { "label": "[Tech 1]",   "color": "cyan"  },
-          { "label": "[Tech 2]",   "color": "cyan"  }
-        ]
-      },
-      {
-        "side": "left",
-        "category": "launch",
-        "icon": "🎮",
-        "date": "2022.11",
-        "categoryLabel": "Launch",
-        "title": "PixelRogue — Game Jam Entry",
-        "org": "72-Hour Game Jam · Solo",
-        "body": [
-          "Built a complete browser-based roguelike in <mark class=\"hl\">72 hours</mark> — procedurally generated dungeons, turn-based combat, and <mark class=\"hl--cyan\">30+ enemy types</mark>.",
-          "Ranked <mark class=\"hl\">[X] out of [Y]</mark> submissions. <a href=\"#\" target=\"_blank\" rel=\"noopener\">Play it in your browser ↗</a> &nbsp;·&nbsp; <a href=\"https://github.com/briannnyee\" target=\"_blank\" rel=\"noopener\">Source ↗</a>"
-        ],
-        "tags": [
-          { "label": "Game Jam",   "color": "yellow" },
-          { "label": "JavaScript", "color": "cyan"   },
-          { "label": "Canvas API", "color": "cyan"   }
-        ]
-      }
     ]
   }
 ]
