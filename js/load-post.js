@@ -1,18 +1,28 @@
-/* load-post.js — Renders post.html from data/blog.json + data/posts/{id}.json
-   Supports content blocks: text, heading, image, video, code, quote, list, divider. */
+/* load-post.js — Renders post.html from data/blog.json + article content.
+   Article content is loaded from either:
+     1. data/posts/{id}.md   — preferred, full markdown (GFM)
+     2. data/posts/{id}.json — fallback, structured content blocks
+*/
 (function () {
 
-  function safeFetch(url) {
+  // ── Fetch helpers (text and JSON variants) ────────────────
+  function safeFetchJson(url) {
     return fetch(url).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     }).catch(function () { return null; });
   }
 
+  function safeFetchText(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    }).catch(function () { return null; });
+  }
+
   function getQueryId() {
     try {
-      var params = new URLSearchParams(window.location.search);
-      return params.get('id');
+      return new URLSearchParams(window.location.search).get('id');
     } catch (e) {
       return null;
     }
@@ -25,12 +35,14 @@
     return;
   }
 
+  // Fetch blog index + markdown body in parallel. Markdown is the
+  // preferred format; if it's missing we try the JSON fallback.
   Promise.all([
-    safeFetch('data/blog.json'),
-    safeFetch('data/posts/' + id + '.json')
+    safeFetchJson('data/blog.json'),
+    safeFetchText('data/posts/' + id + '.md')
   ]).then(function (results) {
     var blog = results[0];
-    var postContent = results[1];
+    var md = results[1];
 
     if (!blog || !Array.isArray(blog.posts)) {
       renderNotFound('Blog index is unavailable.');
@@ -43,27 +55,32 @@
       return;
     }
 
-    if (!postContent) {
-      renderNotFound('Content file missing for "' + id + '".');
+    if (md != null) {
+      renderPostMarkdown(meta, md);
       return;
     }
 
-    renderPost(meta, postContent);
+    // Markdown missing — fall back to the JSON block format.
+    safeFetchJson('data/posts/' + id + '.json').then(function (content) {
+      if (!content) {
+        renderNotFound('Content file missing for "' + id + '".');
+        return;
+      }
+      renderPostBlocks(meta, content);
+    });
   });
 
-  // ── Render: header + body ──────────────────────────────────
-  function renderPost(meta, content) {
+  // ── Shared: header (cover, tags, title, meta) ─────────────
+  function renderHeader(meta, coverOverride) {
     document.title = meta.title + ' — Ming-Han Lee';
 
-    // Cover image (optional — from content.cover or meta.cover)
-    var coverUrl = content.cover || meta.cover;
+    var coverUrl = coverOverride || meta.cover;
     var coverEl = document.getElementById('post-cover');
     if (coverEl && coverUrl) {
       coverEl.className = 'post__cover';
-      coverEl.innerHTML = '<img src="' + coverUrl + '" alt="' + escapeAttr(meta.title) + ' cover">';
+      coverEl.innerHTML = '<img src="' + escapeAttr(coverUrl) + '" alt="' + escapeAttr(meta.title) + ' cover">';
     }
 
-    // Tags
     var tagsEl = document.getElementById('post-tags');
     if (tagsEl && Array.isArray(meta.tags)) {
       tagsEl.innerHTML = meta.tags.map(function (t) {
@@ -71,31 +88,107 @@
       }).join('');
     }
 
-    // Title
     var titleEl = document.getElementById('post-title');
     if (titleEl) titleEl.textContent = meta.title;
 
-    // Meta (date + readtime)
     var metaEl = document.getElementById('post-meta');
     if (metaEl) {
       metaEl.innerHTML =
         '<span class="post__meta-date">' + escapeHtml(meta.date) + '</span>' +
         '<span class="post__meta-readtime">' + escapeHtml(meta.readtime) + '</span>';
     }
+  }
 
-    // Body — iterate blocks
+  // ── Markdown rendering ────────────────────────────────────
+  function renderPostMarkdown(meta, md) {
+    if (typeof marked === 'undefined') {
+      console.error('load-post: marked library is not loaded');
+      renderNotFound('Markdown parser failed to load.');
+      return;
+    }
+
+    renderHeader(meta);
+
+    var bodyEl = document.getElementById('post-body');
+    if (!bodyEl) return;
+
+    // GFM on, auto-linebreaks off (CommonMark behavior).
+    marked.setOptions({ gfm: true, breaks: false });
+    bodyEl.innerHTML = marked.parse(md);
+
+    postProcessMarkdownHtml(bodyEl);
+  }
+
+  // Post-process the DOM that marked produced so it matches the site's
+  // existing post.css styling conventions.
+  function postProcessMarkdownHtml(bodyEl) {
+    // 1. Mirror `language-xxx` class from <code> onto <pre data-lang="xxx">
+    //    so the existing .post__body pre::before badge works unchanged.
+    bodyEl.querySelectorAll('pre > code[class*="language-"]').forEach(function (code) {
+      var m = code.className.match(/language-(\S+)/);
+      if (m && code.parentElement && !code.parentElement.hasAttribute('data-lang')) {
+        code.parentElement.setAttribute('data-lang', m[1]);
+      }
+    });
+
+    // 2. Wrap any bare <iframe> or <video> in .post__video so embeds
+    //    get the responsive 16:9 frame from post.css. Authors can
+    //    paste a YouTube iframe or <video> tag directly into their md.
+    bodyEl.querySelectorAll('iframe, video').forEach(function (el) {
+      if (el.closest('.post__video')) return;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'post__video';
+      el.parentNode.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
+    });
+
+    // 3. Blockquote citations: if the last <p> inside a <blockquote>
+    //    starts with an em/en-dash, convert it to a <cite> so the
+    //    existing blockquote cite::before arrow styling applies.
+    bodyEl.querySelectorAll('blockquote').forEach(function (bq) {
+      var paras = bq.querySelectorAll(':scope > p');
+      if (!paras.length) return;
+      var last = paras[paras.length - 1];
+      var text = (last.textContent || '').trim();
+      var match = text.match(/^[—–]\s+(.+)$/);
+      if (match) {
+        var cite = document.createElement('cite');
+        cite.textContent = match[1];
+        last.replaceWith(cite);
+      }
+    });
+
+    // 4. Wrap standalone <img> in a <figure> so they get the cut-corner
+    //    frame + optional caption treatment. Markdown images with title
+    //    text (`![alt](src "caption")`) get the title as figcaption.
+    bodyEl.querySelectorAll('p > img:only-child').forEach(function (img) {
+      var p = img.parentElement;
+      var figure = document.createElement('figure');
+      figure.appendChild(img);
+      if (img.title) {
+        var caption = document.createElement('figcaption');
+        caption.textContent = img.title;
+        figure.appendChild(caption);
+        img.removeAttribute('title');
+      }
+      p.replaceWith(figure);
+    });
+  }
+
+  // ── JSON block rendering (fallback format) ────────────────
+  function renderPostBlocks(meta, content) {
+    renderHeader(meta, content.cover);
+
     var bodyEl = document.getElementById('post-body');
     if (bodyEl && Array.isArray(content.body)) {
       bodyEl.innerHTML = content.body.map(renderBlock).filter(Boolean).join('');
     }
   }
 
-  // ── Block dispatcher ───────────────────────────────────────
   function renderBlock(block) {
     if (!block || !block.type) return '';
     switch (block.type) {
       case 'text':
-        // Inline HTML is trusted (author-written).
         return '<p>' + (block.content || '') + '</p>';
 
       case 'heading':
@@ -119,7 +212,6 @@
           : '';
         var media;
         if (block.embed) {
-          // YouTube / Vimeo / other iframe embed
           media = '<div class="post__video">'
             + '<iframe src="' + escapeAttr(block.src || '') + '"'
             + ' title="' + escapeAttr(block.caption || 'Embedded video') + '"'
@@ -161,7 +253,7 @@
     }
   }
 
-  // ── Not found state ────────────────────────────────────────
+  // ── Not found state ───────────────────────────────────────
   function renderNotFound(reason) {
     document.title = 'Post not found — Ming-Han Lee';
     var title = document.getElementById('post-title');
