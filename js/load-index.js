@@ -1,16 +1,54 @@
 /* load-index.js — Renders index.html content from data/site.json */
 (function () {
 
-  fetch('data/site.json')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      renderHeroStats(data.hero.stats);
-      renderAbout(data.about);
-      startTypewriter(data.hero.typewriterPhrases);
-      // Re-run counter setup for the newly added [data-count] elements
-      if (window.GlitchUtils) window.GlitchUtils.setupCounters();
-    })
-    .catch(function (err) { console.warn('load-index: failed to load site.json', err); });
+  // Fetch site config + all data files that feed hero stats in parallel.
+  // Each data fetch is made resilient with .catch so one bad file doesn't
+  // kill the whole page render.
+  function safeFetch(url) {
+    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return null; });
+  }
+
+  Promise.all([
+    safeFetch('data/site.json'),
+    safeFetch('data/projects.json'),
+    safeFetch('data/blog.json'),
+    safeFetch('data/games.json')
+  ]).then(function (results) {
+    var site = results[0];
+    var projects = results[1];
+    var blog = results[2];
+    var games = results[3];
+    if (!site) { console.warn('load-index: site.json missing'); return; }
+
+    var counts = computeCounts(projects, blog, games);
+    renderHeroStats(resolveStats(site.hero.stats, counts));
+    renderAbout(site.about);
+    startTypewriter(site.hero.typewriterPhrases);
+    if (window.GlitchUtils) window.GlitchUtils.setupCounters();
+  });
+
+  // ── Auto-computed counts from data files ──────────────────
+  function computeCounts(projects, blog, games) {
+    var projectCount = Array.isArray(projects) ? projects.length : 0;
+    var blogCount = (blog && Array.isArray(blog.posts)) ? blog.posts.length : 0;
+    // "Games Played" = any game that isn't in the backlog (completed + playing)
+    var gamesPlayed = 0;
+    if (games && Array.isArray(games.games)) {
+      gamesPlayed = games.games.filter(function (g) { return g.status !== 'backlog'; }).length;
+    }
+    return { projects: projectCount, blog: blogCount, games: gamesPlayed };
+  }
+
+  // Replace `source: "projects"|"blog"|"games"` stats with the live count.
+  // Stats without a `source` keep their static `value`.
+  function resolveStats(stats, counts) {
+    return stats.map(function (s) {
+      if (s.source && counts[s.source] != null) {
+        return { label: s.label, value: counts[s.source] };
+      }
+      return s;
+    });
+  }
 
   // ── Hero stats ─────────────────────────────────────────────
   function renderHeroStats(stats) {

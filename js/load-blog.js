@@ -18,18 +18,24 @@
     parent.querySelectorAll('.fade-up').forEach(function (el) { obs.observe(el); });
   }
 
+  function postUrl(post) {
+    return 'post.html?id=' + encodeURIComponent(post.id);
+  }
+
   function renderPosts(posts) {
     var list = document.getElementById('post-list');
     if (!list) return;
 
-    var html = posts.map(function (post, i) {
+    var html = posts.map(function (post) {
       var featuredClass = post.featured ? ' post-card--featured' : '';
       var featuredLabel = post.featured ? '<div class="featured-label">FEATURED POST</div>' : '';
       var tags = post.tags.map(function (t) {
         return '<span class="badge badge--' + t.color + '">' + t.label + '</span>';
       }).join('');
+      var url = postUrl(post);
 
-      return '<article class="post-card' + featuredClass + ' fade-up">'
+      // The whole card is a single anchor so the entire surface is a click target.
+      return '<a class="post-card' + featuredClass + ' fade-up" href="' + url + '">'
         + featuredLabel
         + '<div class="post-card__meta">'
         + '<span class="post-card__date">' + post.date + '</span>'
@@ -38,11 +44,10 @@
         + '</div>'
         + '<h2 class="post-card__title">' + post.title + '</h2>'
         + '<p class="post-card__excerpt">' + post.excerpt + '</p>'
-        + '<a href="' + post.href + '" class="post-card__link">Read Article</a>'
-        + '</article>';
+        + '<span class="post-card__link">Read Article</span>'
+        + '</a>';
     }).join('');
 
-    html += '<div class="blog-more fade-up"><a href="#" class="btn">[ LOAD MORE POSTS ]</a></div>';
     list.innerHTML = html;
     observeFadeUps(list);
   }
@@ -64,10 +69,10 @@
     var recentEl = document.getElementById('sidebar-recent');
     if (recentEl) {
       recentEl.innerHTML = posts.slice(0, 4).map(function (p) {
-        return '<div class="recent-item">'
+        return '<a class="recent-item" href="' + postUrl(p) + '">'
           + '<span class="recent-item__title">' + p.title + '</span>'
           + '<span class="recent-item__date">' + p.date + '</span>'
-          + '</div>';
+          + '</a>';
       }).join('');
     }
   }

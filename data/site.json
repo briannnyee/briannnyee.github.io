@@ -9,10 +9,10 @@
       "System Optimization"
     ],
     "stats": [
-      { "value": 12, "label": "Projects" },
-      { "value": 5,  "label": "Blog Posts" },
-      { "value": 50, "label": "Games Played" },
-      { "value": 5,  "label": "Years Coding" }
+      { "label": "Projects",     "source": "projects" },
+      { "label": "Blog Posts",   "source": "blog" },
+      { "label": "Games Played", "source": "games" },
+      { "value": 9, "label": "Years Coding" }
     ]
   },
   "about": {

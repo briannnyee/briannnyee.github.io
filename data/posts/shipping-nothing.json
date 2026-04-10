@@ -1,0 +1,90 @@
+{
+  "body": [
+    {
+      "type": "text",
+      "content": "I spent three months building a product nobody used. Not \"low traction.\" Not \"slow start.\" <strong>Zero users.</strong> The kind of zero where the only traffic in your analytics dashboard is your own refreshes."
+    },
+    {
+      "type": "text",
+      "content": "It was, without question, the most useful three months of my career."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "content": "The Pitch"
+    },
+    {
+      "type": "text",
+      "content": "The idea was simple and, in my head, obviously good. I'd noticed that every developer I knew kept a messy folder of one-off scripts — little utilities to rename files, download data, automate a tedious workflow. What if there was a place to share those scripts? A clean interface, versioning, maybe a way to install them with a single command. A GitHub Gists for scripts that actually got used."
+    },
+    {
+      "type": "text",
+      "content": "I talked to exactly two friends about it. They both said \"huh, that's cool.\" I took that as validation and started building."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "content": "What I Built"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "A CLI tool in Go that could install and run scripts from a central registry",
+        "A web UI with syntax highlighting, tags, and a decent search",
+        "Authentication with GitHub OAuth",
+        "A whole rating and comment system nobody would ever use",
+        "A landing page I wrote and rewrote four times"
+      ]
+    },
+    {
+      "type": "text",
+      "content": "Every single one of those features was built before I had <em>one</em> conversation with a stranger about whether they wanted this. Every single one."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "content": "The Thing I Should Have Done First"
+    },
+    {
+      "type": "quote",
+      "content": "The cheapest possible version of your idea is a conversation. You are always more expensive than a conversation."
+    },
+    {
+      "type": "text",
+      "content": "When I finally launched, I posted on a few forums, messaged maybe twenty people directly, and waited. The response was polite silence. A handful of sign-ups, zero scripts uploaded, zero installs. When I asked people why, the answers were consistent: <em>\"I already have a folder for that. I just grep it.\"</em>"
+    },
+    {
+      "type": "text",
+      "content": "The messy folder wasn't a pain point. It was a <strong>feature</strong>. Developers liked the friction because it meant their scripts were private and disposable. I had solved a problem nobody thought they had."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "content": "What I'd Do Differently"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "<strong>Talk to twenty strangers before writing one line of code.</strong> Not friends. Strangers. Friends will lie to make you feel good.",
+        "<strong>Sell it before you build it.</strong> If they won't give you their email to be notified at launch, they won't give you their scripts either.",
+        "<strong>Build the smallest possible thing that can fail fast.</strong> One feature. One screen. One week of work, not three months.",
+        "<strong>Separate the idea from yourself.</strong> The project failing doesn't mean you failed. It means the experiment returned data."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "content": "The Silver Lining"
+    },
+    {
+      "type": "text",
+      "content": "I don't regret building it. Every technical skill I picked up along the way — the Go CLI patterns, the OAuth integration, the Postgres full-text search — has compounded into things I use at my day job now. The product failed. The learning didn't."
+    },
+    {
+      "type": "text",
+      "content": "But the real lesson isn't technical. It's this: <em>build it and they will come</em> is the most expensive lie in software. The cheapest lie, too, since you're the only one telling it to yourself."
+    }
+  ]
+}

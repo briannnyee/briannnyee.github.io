@@ -76,89 +76,128 @@
     const imgUrl = coverUrl(game);
 
     card.innerHTML = `
-      <div class="game-card__inner">
-        <div class="game-card__front">
-          <div class="game-card__cover">
-            <!-- Gradient fallback always present -->
-            <div class="game-card__cover-bg" style="background:${game.bg}; position:absolute; inset:0;">
-              <span style="position:relative; font-size:5rem;">${game.emoji}</span>
-            </div>
-            ${imgUrl ? `
-            <img
-              class="game-card__img"
-              src="${imgUrl}"
-              alt="${game.title} cover"
-              loading="lazy"
-              onerror="this.style.display='none'"
-            >` : ''}
-            <div class="game-card__overlay"></div>
-          </div>
-          <div class="game-card__info">
-            <div class="game-card__status game-card__status--${game.status}">${statusLabel}</div>
-            <div class="game-card__title">${game.title}</div>
-            <div class="game-card__genre">${game.genre}</div>
-            ${game.rating > 0 ? `<div class="game-card__stars" style="margin-top:0.4rem">${stars}</div>` : ''}
-          </div>
+      <div class="game-card__cover">
+        <div class="game-card__cover-bg" style="background:${game.bg}; position:absolute; inset:0;">
+          <span style="position:relative; font-size:5rem;">${game.emoji}</span>
         </div>
-        <div class="game-card__back">
-          <div class="back__title">${game.title}</div>
-          <div class="back__rating">
-            <div class="game-card__stars">${stars}</div>
-            ${game.rating > 0
-              ? `<span class="back__rating-val">${game.rating}/5</span>`
-              : `<span class="back__rating-val">UNPLAYED</span>`}
-          </div>
-          <div class="back__divider"></div>
-          <div class="back__review">${game.review}</div>
-          <div class="back__meta">
-            <div class="back__meta-row">
-              <span class="back__meta-key">Genre</span>
-              <span class="back__meta-val">${game.genre}</span>
-            </div>
-            <div class="back__meta-row">
-              <span class="back__meta-key">Year</span>
-              <span class="back__meta-val">${game.year}</span>
-            </div>
-            ${game.hours > 0 ? `
-            <div class="back__meta-row">
-              <span class="back__meta-key">Hours</span>
-              <span class="back__meta-val">${game.hours}h</span>
-            </div>` : ''}
-          </div>
-          <div class="back__hint">[ click to flip back ]</div>
-        </div>
+        ${imgUrl ? `
+        <img
+          class="game-card__img"
+          src="${imgUrl}"
+          alt="${game.title} cover"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >` : ''}
+        <div class="game-card__overlay"></div>
+      </div>
+      <div class="game-card__info">
+        <div class="game-card__status game-card__status--${game.status}">${statusLabel}</div>
+        <div class="game-card__title">${game.title}</div>
+        <div class="game-card__genre">${game.genre}</div>
+        ${game.rating > 0 ? `<div class="game-card__stars" style="margin-top:0.4rem">${stars}</div>` : ''}
       </div>
     `;
 
-    const inner = card.querySelector('.game-card__inner');
-
-    card.addEventListener('click', () => {
-      // Clear any tilt inline transform so the CSS flip class takes full control
-      inner.style.transform = '';
-      inner.style.transition = '';
-      card.classList.toggle('flipped');
-    });
-
-    // 3D tilt only on pointer devices (not touch)
-    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (canHover) {
-      card.addEventListener('mousemove', (e) => {
-        if (card.classList.contains('flipped')) return;
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width  - 0.5;
-        const y = (e.clientY - rect.top)  / rect.height - 0.5;
-        inner.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 14}deg) scale(1.03)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        if (card.classList.contains('flipped')) return;
-        inner.style.transition = 'transform 0.5s ease';
-        inner.style.transform  = 'rotateY(0) rotateX(0) scale(1)';
-        setTimeout(() => { inner.style.transition = ''; }, 500);
-      });
-    }
+    card.addEventListener('click', () => openModal(game));
 
     return card;
+  }
+
+  // ── Review modal ─────────────────────────────────────────
+  let modalEl = null;
+
+  function ensureModal() {
+    if (modalEl) return modalEl;
+    modalEl = document.createElement('div');
+    modalEl.className = 'game-modal';
+    modalEl.setAttribute('aria-hidden', 'true');
+    modalEl.innerHTML = `
+      <div class="game-modal__backdrop" data-close="1"></div>
+      <div class="game-modal__dialog" role="dialog" aria-modal="true">
+        <button class="game-modal__close" data-close="1" aria-label="Close">×</button>
+        <div class="game-modal__body"></div>
+      </div>
+    `;
+    document.body.appendChild(modalEl);
+
+    // Close on backdrop / close-button click
+    modalEl.addEventListener('click', (e) => {
+      if (e.target.dataset && e.target.dataset.close) closeModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalEl.classList.contains('open')) closeModal();
+    });
+
+    return modalEl;
+  }
+
+  function renderReview(game) {
+    // Support: (1) game.body = array of paragraphs, (2) game.review with \n\n splits,
+    // (3) plain single-paragraph review.
+    if (Array.isArray(game.body) && game.body.length) {
+      return game.body.map(p => `<p>${p}</p>`).join('');
+    }
+    const raw = game.review || '';
+    return raw.split(/\n{2,}/).map(p => `<p>${p.trim()}</p>`).join('');
+  }
+
+  function openModal(game) {
+    const modal = ensureModal();
+    const body = modal.querySelector('.game-modal__body');
+
+    const statusLabel = {
+      completed: 'COMPLETED',
+      playing:   '▶ PLAYING',
+      backlog:   'BACKLOG',
+    }[game.status];
+
+    const stars = Array.from({length: 5}, (_, i) =>
+      `<span class="star ${i < game.rating ? 'filled' : ''}">★</span>`
+    ).join('');
+
+    body.innerHTML = `
+      <div class="game-modal__header">
+        <div class="game-modal__status game-modal__status--${game.status}">${statusLabel}</div>
+        <h2 class="game-modal__title">${game.title}</h2>
+      </div>
+      <div class="game-modal__meta">
+        <div class="game-modal__meta-chip">
+          <span class="game-modal__meta-key">Genre</span>
+          <span class="game-modal__meta-val">${game.genre}</span>
+        </div>
+        <div class="game-modal__meta-chip">
+          <span class="game-modal__meta-key">Year</span>
+          <span class="game-modal__meta-val">${game.year}</span>
+        </div>
+        <div class="game-modal__meta-chip">
+          <span class="game-modal__meta-key">Hours</span>
+          <span class="game-modal__meta-val">${game.hours > 0 ? game.hours + 'h' : '—'}</span>
+        </div>
+      </div>
+      ${game.rating > 0 ? `
+      <div class="game-modal__rating">
+        <div class="game-card__stars">${stars}</div>
+        <span class="game-modal__rating-val">${game.rating}/5</span>
+      </div>` : ''}
+      <div class="game-modal__divider"></div>
+      <div class="game-modal__review">${renderReview(game)}</div>
+    `;
+
+    // Reset scroll position each open
+    body.scrollTop = 0;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    if (!modalEl) return;
+    modalEl.classList.remove('open');
+    modalEl.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
   }
 
   // ── Progress bar ─────────────────────────────────────────

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — Ming-Han Lee</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">MHL<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="milestones.html">Milestones</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="dreams.html">Dreams</a></li>
+      <li><a href="https://github.com/briannnyee" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav__mobile">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="milestones.html">Milestones</a>
+    <a href="blog.html">Blog</a>
+    <a href="games.html">Games</a>
+    <a href="dreams.html">Dreams</a>
+    <a href="https://github.com/briannnyee" target="_blank">GitHub ↗</a>
+  </div>
+
+  <main class="post-page container">
+
+    <a href="blog.html" class="post__back">← Back to Blog</a>
+
+    <article class="post fade-up">
+
+      <!-- Optional cover image -->
+      <div id="post-cover"></div>
+
+      <!-- Header: tags row, title, meta -->
+      <header class="post__header">
+        <div class="post__tags" id="post-tags"></div>
+        <h1 class="post__title" id="post-title">Loading…</h1>
+        <div class="post__meta" id="post-meta"></div>
+      </header>
+
+      <!-- Rendered content blocks -->
+      <div class="post__body" id="post-body"></div>
+
+    </article>
+
+  </main>
+
+  <footer class="footer container">
+    <p class="footer__copy">© 2024 Ming-Han Lee &nbsp;|&nbsp; <span style="color:var(--yellow)">briannnyee.github.io</span></p>
+    <nav class="footer__links">
+      <a href="https://github.com/briannnyee" target="_blank">GitHub</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/glitch.js"></script>
+  <script src="js/load-post.js"></script>
+</body>
+</html>
