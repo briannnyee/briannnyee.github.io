@@ -130,24 +130,33 @@
       </div>
     `;
 
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
+    const inner = card.querySelector('.game-card__inner');
 
-    card.addEventListener('mousemove', (e) => {
-      if (card.classList.contains('flipped')) return;
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width  - 0.5;
-      const y = (e.clientY - rect.top)  / rect.height - 0.5;
-      card.querySelector('.game-card__inner').style.transform =
-        `rotateY(${x * 18}deg) rotateX(${-y * 14}deg) scale(1.03)`;
+    card.addEventListener('click', () => {
+      // Clear any tilt inline transform so the CSS flip class takes full control
+      inner.style.transform = '';
+      inner.style.transition = '';
+      card.classList.toggle('flipped');
     });
 
-    card.addEventListener('mouseleave', () => {
-      if (card.classList.contains('flipped')) return;
-      const inner = card.querySelector('.game-card__inner');
-      inner.style.transition = 'transform 0.5s ease';
-      inner.style.transform  = 'rotateY(0) rotateX(0) scale(1)';
-      setTimeout(() => { inner.style.transition = ''; }, 500);
-    });
+    // 3D tilt only on pointer devices (not touch)
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (canHover) {
+      card.addEventListener('mousemove', (e) => {
+        if (card.classList.contains('flipped')) return;
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        inner.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 14}deg) scale(1.03)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (card.classList.contains('flipped')) return;
+        inner.style.transition = 'transform 0.5s ease';
+        inner.style.transform  = 'rotateY(0) rotateX(0) scale(1)';
+        setTimeout(() => { inner.style.transition = ''; }, 500);
+      });
+    }
 
     return card;
   }
