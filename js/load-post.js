@@ -79,6 +79,9 @@
     if (coverEl && coverUrl) {
       coverEl.className = 'post__cover';
       coverEl.innerHTML = '<img src="' + escapeAttr(coverUrl) + '" alt="' + escapeAttr(meta.title) + ' cover">';
+    } else if (coverEl && meta.coverPlaceholder) {
+      coverEl.className = 'post__cover post__cover--placeholder';
+      coverEl.innerHTML = '<span class="post__cover-label">// IMAGE_PLACEHOLDER</span>';
     }
 
     var tagsEl = document.getElementById('post-tags');
