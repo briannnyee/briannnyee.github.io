@@ -1,61 +1,18 @@
 {
   "posts": [
     {
-      "id": "system-design-game-designer",
+      "id": "the-rise-of-the-machine",
       "featured": true,
-      "date": "2024.11.15",
-      "readtime": "12 MIN READ",
-      "tags": [
-        { "label": "Engineering", "color": "yellow" },
-        { "label": "Systems",     "color": "cyan"   }
-      ],
-      "title": "Why I Think About System Design Like a Game Designer",
-      "excerpt": "After spending hundreds of hours in complex RPGs, I noticed something: the best game systems and the best software systems share a surprising amount of DNA. Both require elegant constraint, emergent behavior, and deep respect for the user's time. Here's what Elden Ring taught me about API design."    },
-    {
-      "id": "useeffect-deep-dive",
-      "date": "2024.10.03",
-      "readtime": "8 MIN READ",
-      "tags": [
-        { "label": "React",       "color": "cyan"   },
-        { "label": "Performance", "color": "yellow" }
-      ],
-      "title": "The Hidden Cost of useEffect: A Deep Dive",
-      "excerpt": "Most React developers use useEffect daily without fully understanding its execution model. After profiling several production apps, I found that misused effects were responsible for some of the most subtle and painful bugs I've ever encountered. Let's fix that."    },
-    {
-      "id": "shipping-nothing",
-      "date": "2024.08.22",
-      "readtime": "6 MIN READ",
-      "tags": [
-        { "label": "Career",     "color": "magenta" },
-        { "label": "Reflection", "color": "yellow"  }
-      ],
-      "title": "What I Learned From Shipping Something Nobody Used",
-      "excerpt": "I spent three months building a product that got zero traction. Here's what I learned about validation, assumptions, and why \"build it and they will come\" is the most dangerous lie in software."    },
-    {
-      "id": "personal-cli",
-      "date": "2024.06.10",
+      "coverPlaceholder": false,
+      "cover": "assets/posts/the-rise-of-the-machine.png",
+      "date": "2026.04.11",
       "readtime": "5 MIN READ",
       "tags": [
-        { "label": "Python", "color": "cyan" },
-        { "label": "Tools",  "color": "cyan" }
+        { "label": "AI/ML",      "color": "yellow"  },
+        { "label": "Reflection", "color": "magenta" }
       ],
-      "title": "Building a Personal CLI That Actually Gets Used",
-      "excerpt": "I've tried and abandoned dozens of productivity tools. The only ones that stick are the ones I build myself. Here's my approach to building CLI tools that become indispensable parts of your workflow."    },
-    {
-      "id": "ai-tools-honest-guide",
-      "date": "2024.04.05",
-      "readtime": "10 MIN READ",
-      "tags": [
-        { "label": "AI/ML",   "color": "yellow"  },
-        { "label": "Opinion", "color": "magenta" }
-      ],
-      "title": "The Honest Engineer's Guide to Using AI Tools",
-      "excerpt": "There's a lot of noise around AI coding tools. After a year of daily use, here's my honest take on what they're genuinely good at, where they fail, and how I've restructured my workflow around their actual strengths and weaknesses."    }
-  ],
-  "sidebar": {
-    "about": "I'm Ming-Han, a software engineer who writes about engineering, career lessons, and occasionally what I'm playing. I aim to write things that are honest and technically useful.",
-    "topics": [
-      "Engineering","React","Python","Career","Systems","AI/ML","Performance","Tools","Opinion","Games"
-    ]
-  }
+      "title": "When the Future Arrives Eight Years Early: Rewatching The Rise of the Machines in 2026",
+      "excerpt": "I clicked on a Kurzgesagt video from 2018 expecting a familiar take on AI. Instead I found an eight-year-old map of the world I'm living in today — and a forcing function to rethink where I want to stand in it. On agentic AI, embodied intelligence, and the narrow window to help engineer the transfer."
+    }
+  ]
 }
