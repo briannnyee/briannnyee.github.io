@@ -4,10 +4,28 @@
   fetch('data/projects.json')
     .then(function (r) { return r.json(); })
     .then(function (projects) {
+      renderFilters(projects);
       renderProjects(projects);
       setupFilter();
     })
     .catch(function (err) { console.warn('load-projects: failed to load projects.json', err); });
+
+  function renderFilters(projects) {
+    var bar = document.getElementById('filter-bar');
+    if (!bar) return;
+    var seen = {};
+    var cats = [];
+    projects.forEach(function (p) {
+      if (!p.category || seen[p.category]) return;
+      seen[p.category] = true;
+      cats.push({ key: p.category, label: p.categoryLabel || p.category });
+    });
+    var html = '<button class="filter-btn active" data-filter="all">All</button>';
+    html += cats.map(function (c) {
+      return '<button class="filter-btn" data-filter="' + c.key + '">' + c.label + '</button>';
+    }).join('');
+    bar.innerHTML = html;
+  }
 
   function renderProjects(projects) {
     var grid = document.getElementById('projects-grid');
