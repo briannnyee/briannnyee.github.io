@@ -1,112 +1,104 @@
 [
   {
-    "id": "alpha",
+    "id": "roboretriever",
     "featured": true,
-    "category": "web",
-    "categoryLabel": "WEB / FEATURED",
-    "year": "2024",
-    "title": "Project Alpha",
-    "desc": "A full-stack web application that [describe what it does]. Built with a focus on performance and developer experience. Handles [X] users and processes [Y] requests per day. Replace this with your real project description.",
+    "category": "ai",
+    "categoryLabel": "Robotics & AI",
+    "year": "2025",
+    "title": "Golden Robo Retriever",
+    "desc": "A quadrupedal loco-manipulator powered by ACT (Action Chunking Transformer) with real-time voice interface, designed to retrieve anything human asks for.",
     "stack": [
-      { "label": "React",      "color": "cyan"    },
-      { "label": "TypeScript", "color": "cyan"    },
-      { "label": "Node.js",    "color": "yellow"  },
-      { "label": "PostgreSQL", "color": "yellow"  },
-      { "label": "Docker",     "color": "magenta" }
+      { "label": "ACT",      "color": "yellow"    },
+      { "label": "PyTorch", "color": "cyan"    },
+      { "label": "OpenAI API",    "color": "yellow"  }
     ],
     "links": [
-      { "label": "GitHub",     "href": "https://github.com/briannnyee", "variant": ""         },
-      { "label": "Live Demo ↗","href": "#",                              "variant": "btn--cyan" }
+      { "label": "GitHub",     "href": "https://github.com/DominiquePaul/golden-robot-retriever", "variant": ""         },
+      { "label": "Live Demo ↗","href": "https://www.youtube.com/watch?v=6dvA0egj8LI",             "variant": "btn--cyan" }
     ],
     "accentColor": "var(--cyan)"
   },
   {
-    "id": "devtrack",
-    "category": "web",
-    "categoryLabel": "WEB APP",
-    "year": "2024",
-    "title": "DevTrack",
-    "desc": "A developer productivity dashboard with real-time analytics, task tracking, and GitHub integration. Visualizes coding habits over time.",
+    "id": "erc4907",
+    "category": "web3",
+    "categoryLabel": "Smart Contract",
+    "year": "2022",
+    "title": "ERC4907 Demo",
+    "desc": "A project demonstrates a ERC4907 use case. It comes with a sample ERC4907-NFT, a rental place for the NFT, tests for both contracts, and a script that deploys both contracts.",
     "stack": [
-      { "label": "Vue 3",    "color": "cyan"    },
-      { "label": "FastAPI",  "color": "yellow"  },
-      { "label": "Redis",    "color": "yellow"  },
-      { "label": "Charts.js","color": "magenta" }
+      { "label": "Web 3.0",    "color": "magenta"    },
+      { "label": "Solidity",  "color": "magenta"  },
+      { "label": "EVM",    "color": "magenta"  }
     ],
     "links": [
-      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
-    ],
-    "accentColor": "var(--yellow)"
-  },
-  {
-    "id": "nightshell",
-    "category": "tools",
-    "categoryLabel": "CLI TOOL",
-    "year": "2023",
-    "title": "NightShell",
-    "desc": "A customizable terminal theme manager with preset color schemes and font configuration. Supports iTerm2, Windows Terminal, and Alacritty.",
-    "stack": [
-      { "label": "Python", "color": "cyan"    },
-      { "label": "Bash",   "color": "yellow"  },
-      { "label": "PyPI",   "color": "magenta" }
-    ],
-    "links": [
-      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
+      { "label": "GitHub", "href": "https://github.com/briannnyee/ERC4907-demo", "variant": "" }
     ],
     "accentColor": "var(--magenta)"
   },
   {
-    "id": "sentimentscan",
-    "category": "ml",
-    "categoryLabel": "ML / AI",
-    "year": "2023",
-    "title": "SentimentScan",
-    "desc": "Fine-tuned a BERT model for domain-specific sentiment analysis. Achieved 94% accuracy on a custom dataset of 50k reviews. Served via FastAPI.",
-    "stack": [
-      { "label": "Python",       "color": "cyan"    },
-      { "label": "PyTorch",      "color": "yellow"  },
-      { "label": "Transformers", "color": "yellow"  },
-      { "label": "FastAPI",      "color": "magenta" }
-    ],
-    "links": [
-      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": "" }
-    ],
-    "accentColor": "var(--green)"
-  },
-  {
-    "id": "collabboard",
-    "category": "web",
-    "categoryLabel": "WEB APP",
-    "year": "2023",
-    "title": "CollabBoard",
-    "desc": "Real-time collaborative whiteboard with WebSocket sync, infinite canvas, and export-to-PDF. Supports multiple simultaneous users.",
-    "stack": [
-      { "label": "React",      "color": "cyan"    },
-      { "label": "WebSockets", "color": "cyan"    },
-      { "label": "Canvas API", "color": "yellow"  },
-      { "label": "Socket.io",  "color": "magenta" }
-    ],
-    "links": [
-      { "label": "GitHub",     "href": "https://github.com/briannnyee", "variant": ""         },
-      { "label": "Live Demo ↗","href": "#",                              "variant": "btn--cyan" }
-    ],
-    "accentColor": "var(--cyan)"
-  },
-  {
-    "id": "pixelrogue",
-    "category": "other",
-    "categoryLabel": "GAME / OTHER",
+    "id": "sbt",
+    "category": "web3",
+    "categoryLabel": "Smart Contract",
     "year": "2022",
-    "title": "PixelRogue",
-    "desc": "A browser-based roguelike built in a 72-hour game jam. Procedurally generated dungeons, turn-based combat, and 30+ enemy types.",
+    "title": "Soulbound Token Demo",
+    "desc": "This contract establishes a soulbound token system where an authoritative Creator manages the lifecycle of Souls, permitting transfers only upon the Soul's explicit request.",
     "stack": [
-      { "label": "JavaScript",  "color": "cyan"    },
-      { "label": "HTML5 Canvas","color": "yellow"  },
-      { "label": "Web Audio",   "color": "magenta" }
+      { "label": "Web 3.0",    "color": "magenta"    },
+      { "label": "Solidity",  "color": "magenta"  },
+      { "label": "EVM",    "color": "magenta"  }
     ],
     "links": [
-      { "label": "GitHub", "href": "https://github.com/briannnyee", "variant": ""         },
-      { "label": "Play ↗",  "href": "#",                             "variant": "btn--cyan" }
+      { "label": "GitHub", "href": "https://github.com/briannnyee/proto-sbt", "variant": "" }
+    ],
+    "accentColor": "var(--magenta)"
+  },
+  {
+    "id": "ethportal",
+    "category": "tools",
+    "categoryLabel": "CLI Tool",
+    "year": "2022",
+    "title": "0xEth Portal",
+    "desc": "0xEthPortal is a pre-configured Hardhat Console clone that simplifies Ethereum network interaction by providing a ready-to-use terminal environment supporting both ethers.js and web3.js through a streamlined setup process.",
+    "stack": [
+      { "label": "EVM",       "color": "magenta"    },
+      { "label": "JavaScript",      "color": "yellow"  }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/briannnyee/0xEthPortal", "variant": "" }
+    ],
+    "accentColor": "var(--magenta)"
+  },
+  {
+    "id": "taipeiethereumctf",
+    "category": "web3",
+    "categoryLabel": "Smart Contract",
+    "year": "2022",
+    "title": "Taipei Ethereum CTF Problem X: The Archive Room Secret",
+    "desc": "In this Ethereum CTF challenge, players must bypass an \"under maintenance\" restriction to trigger an alarm and set the confidentialFileLeakedAlarm state to 0xbad, signaling that the secrets hidden within the Agent Robot Vacuum have been compromised.",
+    "stack": [
+      { "label": "Web 3.0 CTF",    "color": "magenta"    },
+      { "label": "Solidity",  "color": "magenta"  },
+      { "label": "Smart Contract Security",    "color": "magenta"  }
+    ],
+    "links": [
+      { "label": "GitHub",     "href": "https://github.com/briannnyee/taipei-ethereum-ctf", "variant": ""         }
+    ],
+    "accentColor": "var(--magenta)"
+  },
+  {
+    "id": "letteryou",
+    "category": "web",
+    "categoryLabel": "Platform",
+    "year": "2022",
+    "title": "LetterYou: An Afterlife Time Capsule Service",
+    "desc": "LetterYou is a blockchain-powered time-capsule platform that utilizes NFT storage and decentralized verification systems to securely preserve and deliver messages to designated recipients following a user's passing.",
+    "stack": [
+      { "label": "Node.js",  "color": "yellow"    },
+      { "label": "PostgreSQL",   "color": "yellow" },
+      { "label": "React.js",   "color": "yellow" }
+    ],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/Vertical-Perpendicular/letteryou-production", "variant": ""         }
     ],
     "accentColor": "var(--yellow)"
   }
