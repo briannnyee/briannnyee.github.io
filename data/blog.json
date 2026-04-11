@@ -14,5 +14,11 @@
       "title": "When the Future Arrives Eight Years Early: Rewatching The Rise of the Machines in 2026",
       "excerpt": "I clicked on a Kurzgesagt video from 2018 expecting a familiar take on AI. Instead I found an eight-year-old map of the world I'm living in today — and a forcing function to rethink where I want to stand in it. On agentic AI, embodied intelligence, and the narrow window to help engineer the transfer."
     }
-  ]
+  ],
+  "sidebar": {
+    "about": "I'm Ming-Han Lee — a builder at the seam of Machine Learning, Systems, and Robotics, with a Master's from ETH Zurich. I write about engineering, games, and the occasional reflection.",
+    "topics": [
+      "Robotics", "AI/ML", "Systems", "Tools", "Career", "Opinion", "Reflection"
+    ]
+  }
 }
