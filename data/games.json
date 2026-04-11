@@ -8,18 +8,18 @@
       "review": "An absolutely immersive open world. Night City feels alive and the story kept me hooked till the very end. The Phantom Liberty DLC is a masterpiece."
     },
     {
-      "id": 2, "title": "Elden Ring", "genre": "Action RPG", "status": "completed",
+      "id": 2, "title": "Elden Ring", "genre": "Action RPG", "status": "backlog",
       "rating": 5, "year": 2022, "hours": 200, "steamId": 1245620,
       "bg": "linear-gradient(135deg, #0d0a00 0%, #2a1a00 50%, #FCEE0922 100%)",
       "emoji": "⚔️",
       "review": "The most rewarding game I have ever played. Every boss feels like a mountain to climb."
     },
     {
-      "id": 3, "title": "Hades", "genre": "Roguelike", "status": "completed",
-      "rating": 5, "year": 2020, "hours": 80, "steamId": 1145360,
-      "bg": "linear-gradient(135deg, #1a0005 0%, #3d0015 50%, #FF002244 100%)",
-      "emoji": "🔱",
-      "review": "Incredible gameplay loop. The writing and character relationships are surprisingly deep for a roguelike."
+      "id": 3, "title": "Hollow Knight: Silksong", "genre": "Metroidvania", "status": "completed",
+      "rating": 0, "year": 2025, "hours": 0, "steamId": 1030300,
+      "bg": "linear-gradient(135deg, #050d0a 0%, #0a1f14 50%, #FF006E22 100%)",
+      "emoji": "🪡",
+      "review": "The sequel a decade of players have been waiting for. Hornet takes center stage and I can't wait to dive in."
     },
     {
       "id": 4, "title": "The Witcher 3", "genre": "RPG", "status": "completed",
@@ -36,32 +36,25 @@
       "review": "Stunning art direction and brutal but fair combat. The lore is incredibly deep for an indie title."
     },
     {
-      "id": 6, "title": "Baldur's Gate 3", "genre": "RPG", "status": "playing",
+      "id": 6, "title": "Baldur's Gate 3", "genre": "RPG", "status": "backlog",
       "rating": 5, "year": 2023, "hours": 65, "steamId": 1086940,
       "bg": "linear-gradient(135deg, #0a0005 0%, #1a0020 50%, #9900FF22 100%)",
       "emoji": "🎲",
       "review": "Currently in Act 2. This game is redefining what RPGs can be. Every decision feels meaningful."
     },
     {
-      "id": 7, "title": "Sekiro", "genre": "Action", "status": "completed",
+      "id": 7, "title": "Sekiro", "genre": "Action", "status": "backlog",
       "rating": 4, "year": 2019, "hours": 45, "steamId": 814380,
       "bg": "linear-gradient(135deg, #0d0505 0%, #1a0a0a 50%, #FF444422 100%)",
       "emoji": "🗡️",
       "review": "The most satisfying combat system in any game. Learning the rhythm of each boss is pure zen."
     },
     {
-      "id": 8, "title": "Death Stranding", "genre": "Adventure", "status": "completed",
+      "id": 8, "title": "Death Stranding", "genre": "Adventure", "status": "backlog",
       "rating": 4, "year": 2019, "hours": 60, "steamId": 1190460,
       "bg": "linear-gradient(135deg, #050d0d 0%, #0a1a1a 50%, #00AAAA22 100%)",
       "emoji": "📦",
       "review": "A divisive but unforgettable experience. The themes of connection hit differently post-pandemic."
-    },
-    {
-      "id": 9, "title": "Disco Elysium", "genre": "RPG", "status": "completed",
-      "rating": 5, "year": 2019, "hours": 50, "steamId": 632470,
-      "bg": "linear-gradient(135deg, #080505 0%, #150a0a 50%, #FF880022 100%)",
-      "emoji": "🥃",
-      "review": "The most unique RPG ever made. A philosophical fever dream told through exceptional writing."
     },
     {
       "id": 10, "title": "Control", "genre": "Action", "status": "completed",
@@ -71,28 +64,166 @@
       "review": "Remedy's best work. The brutalist architecture and New Weird storytelling are unlike anything else."
     },
     {
-      "id": 11, "title": "Persona 5 Royal", "genre": "JRPG", "status": "backlog",
-      "rating": 0, "year": 2020, "hours": 0, "steamId": 1687950,
-      "bg": "linear-gradient(135deg, #0a0005 0%, #1a000a 50%, #FF000044 100%)",
-      "emoji": "🎭",
-      "review": "On the list. Heard it's one of the greatest JRPGs ever made. Can't wait to finally start it."
+      "id": 11, "title": "The Legend of Zelda: Breath of the Wild", "genre": "Action-Adventure", "status": "completed",
+      "rating": 0, "year": 2017, "hours": 0,
+      "bg": "linear-gradient(135deg, #05100a 0%, #0d1f15 50%, #39FF1422 100%)",
+      "emoji": "🗡️",
+      "review": "The game that redefined what open world design could be. Long overdue on my list."
     },
     {
-      "id": 12, "title": "Ghost of Tsushima", "genre": "Action", "status": "backlog",
-      "rating": 0, "year": 2020, "hours": 0, "steamId": 2215430,
-      "bg": "linear-gradient(135deg, #050a08 0%, #0a1a12 50%, #00FF8822 100%)",
-      "emoji": "⛩️",
-      "review": "Heard the exploration and combat are beautiful. Samurai aesthetic has me very interested."
+      "id": 12, "title": "The Legend of Zelda: Tears of the Kingdom", "genre": "Action-Adventure", "status": "completed",
+      "rating": 0, "year": 2023, "hours": 0,
+      "bg": "linear-gradient(135deg, #050c1a 0%, #0a1530 50%, #00F5FF22 100%)",
+      "emoji": "🏞️",
+      "review": "A direct sequel that reportedly expands on BotW in every direction. The Ultrahand system looks incredible."
+    },
+    {
+      "id": 13, "title": "Halo: Combat Evolved", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2001, "hours": 0,
+      "bg": "linear-gradient(135deg, #050f0a 0%, #0a1f14 50%, #39FF1422 100%)",
+      "emoji": "👽",
+      "review": "The one that started it all. A genre-defining classic I've somehow never properly played through."
+    },
+    {
+      "id": 14, "title": "Halo 2", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2004, "hours": 0,
+      "bg": "linear-gradient(135deg, #07100a 0%, #0f1f18 50%, #00F5FF22 100%)",
+      "emoji": "🛸",
+      "review": "The introduction of the Arbiter and a sharper multiplayer formula. Next on the Master Chief run."
+    },
+    {
+      "id": 15, "title": "Halo 3", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2007, "hours": 0,
+      "bg": "linear-gradient(135deg, #0a0c05 0%, #1a1a0a 50%, #FCEE0922 100%)",
+      "emoji": "🏅",
+      "review": "The original Chief trilogy's grand finale. I hear the final level still hits."
+    },
+    {
+      "id": 16, "title": "Halo 4", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2012, "hours": 0,
+      "bg": "linear-gradient(135deg, #080a1a 0%, #0f1030 50%, #5555FF22 100%)",
+      "emoji": "🤖",
+      "review": "343's first swing at the series. Curious to see how the Prometheans and the new art direction land."
+    },
+    {
+      "id": 17, "title": "Halo 5: Guardians", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2015, "hours": 0,
+      "bg": "linear-gradient(135deg, #0a0508 0%, #1a0a12 50%, #FF006E22 100%)",
+      "emoji": "⚔️",
+      "review": "The divisive middle entry. Want to play it myself before forming an opinion."
+    },
+    {
+      "id": 18, "title": "Halo Infinite", "genre": "FPS", "status": "completed",
+      "rating": 0, "year": 2021, "hours": 0, "steamId": 1240440,
+      "bg": "linear-gradient(135deg, #050d0a 0%, #0a1a14 50%, #39FF1422 100%)",
+      "emoji": "🎯",
+      "review": "The return to form. A semi-open Zeta Halo has me very interested."
+    },
+    {
+      "id": 19, "title": "Splatoon 2", "genre": "Shooter", "status": "completed",
+      "rating": 0, "year": 2017, "hours": 0,
+      "bg": "linear-gradient(135deg, #0c0510 0%, #1f0a20 50%, #FF006E22 100%)",
+      "emoji": "🦑",
+      "review": "Nintendo's take on the shooter genre. The ink-paint mechanic is pure game design."
+    },
+    {
+      "id": 20, "title": "Splatoon 3", "genre": "Shooter", "status": "completed",
+      "rating": 0, "year": 2022, "hours": 0,
+      "bg": "linear-gradient(135deg, #120608 0%, #25080f 50%, #FCEE0922 100%)",
+      "emoji": "🎨",
+      "review": "The latest iteration with Salmon Run and a refined single-player campaign."
+    },
+    {
+      "id": 21, "title": "Outer Wilds", "genre": "Adventure", "status": "completed",
+      "rating": 0, "year": 2019, "hours": 0, "steamId": 753640,
+      "bg": "linear-gradient(135deg, #0a0510 0%, #150a20 50%, #FCEE0922 100%)",
+      "emoji": "🚀",
+      "review": "Every single person I trust with game recommendations says this is a once-in-a-lifetime experience. Going in blind."
+    },
+    {
+      "id": 22, "title": "Horizon Zero Dawn", "genre": "Action RPG", "status": "completed",
+      "rating": 0, "year": 2020, "hours": 0, "steamId": 1151640,
+      "bg": "linear-gradient(135deg, #0d0a05 0%, #1a1408 50%, #FCEE0922 100%)",
+      "emoji": "🏹",
+      "review": "Post-apocalyptic robot dinosaurs. I don't need much more of a pitch than that."
+    },
+    {
+      "id": 23, "title": "The Elder Scrolls V: Skyrim", "genre": "RPG", "status": "completed",
+      "rating": 0, "year": 2011, "hours": 0, "steamId": 489830,
+      "bg": "linear-gradient(135deg, #050a0d 0%, #0a141f 50%, #00F5FF22 100%)",
+      "emoji": "🐉",
+      "review": "The one RPG I've somehow never finished. This is the year I finally take the arrow to the knee."
+    },
+    {
+      "id": 24, "title": "Portal 2", "genre": "Puzzle", "status": "completed",
+      "rating": 0, "year": 2011, "hours": 0, "steamId": 620,
+      "bg": "linear-gradient(135deg, #0a0805 0%, #1f1508 50%, #FCEE0922 100%)",
+      "emoji": "🔷",
+      "review": "Widely regarded as one of the best-written games ever made. Overdue for a full playthrough."
+    },
+    {
+      "id": 25, "title": "Terraria", "genre": "Sandbox", "status": "completed",
+      "rating": 0, "year": 2011, "hours": 0, "steamId": 105600,
+      "bg": "linear-gradient(135deg, #050d08 0%, #0a1f10 50%, #39FF1422 100%)",
+      "emoji": "🌳",
+      "review": "A deceptively deep 2D sandbox. Friends have told me this game will consume hundreds of hours if I let it."
+    },
+    {
+      "id": 26, "title": "Raft", "genre": "Survival", "status": "completed",
+      "rating": 0, "year": 2022, "hours": 0, "steamId": 648800,
+      "bg": "linear-gradient(135deg, #050d10 0%, #0a1a20 50%, #00F5FF22 100%)",
+      "emoji": "🛟",
+      "review": "A survival game that starts with nothing but a plank and a hook. Perfect co-op material."
+    },
+    {
+      "id": 27, "title": "Firewatch", "genre": "Adventure", "status": "completed",
+      "rating": 0, "year": 2016, "hours": 0, "steamId": 383870,
+      "bg": "linear-gradient(135deg, #100805 0%, #20130a 50%, #FF880022 100%)",
+      "emoji": "🔥",
+      "review": "A short, atmospheric walking sim by Campo Santo. The art direction alone is worth the price of admission."
+    },
+    {
+      "id": 28, "title": "Tomb Raider", "genre": "Action-Adventure", "status": "completed",
+      "rating": 0, "year": 2013, "hours": 0, "steamId": 203160,
+      "bg": "linear-gradient(135deg, #0d0805 0%, #1f1308 50%, #FFAA4422 100%)",
+      "emoji": "🏺",
+      "review": "The 2013 reboot that modernized Lara Croft. Heard the survival arc hits hard."
+    },
+    {
+      "id": 29, "title": "Ori and the Will of the Wisps", "genre": "Metroidvania", "status": "completed",
+      "rating": 0, "year": 2020, "hours": 0, "steamId": 1057090,
+      "bg": "linear-gradient(135deg, #050d0d 0%, #0a1f20 50%, #00F5FF22 100%)",
+      "emoji": "🌟",
+      "review": "The sequel to Blind Forest, universally praised for tightening the combat. The art is simply stunning."
+    },
+    {
+      "id": 30, "title": "This War of Mine", "genre": "Survival", "status": "completed",
+      "rating": 0, "year": 2014, "hours": 0, "steamId": 282070,
+      "bg": "linear-gradient(135deg, #0a0a0a 0%, #15130f 50%, #88888822 100%)",
+      "emoji": "🕯️",
+      "review": "A war game told from the perspective of civilians, not soldiers. Not looking forward to the emotional weight, but I need to play it."
+    },
+    {
+      "id": 31, "title": "Nine Sols", "genre": "Metroidvania", "status": "completed",
+      "rating": 0, "year": 2024, "hours": 0, "steamId": 1809540,
+      "bg": "linear-gradient(135deg, #0d0505 0%, #1f0a0a 50%, #FF444422 100%)",
+      "emoji": "🎎",
+      "review": "A Taopunk Metroidvania with a parry-heavy combat system that borrows from Sekiro. Everything about this is aimed squarely at my taste."
     }
+  ],
+  "topPicks": [
+    { "id": 1,  "tag": "GOAT",              "blurb": "The most rewarding game I have ever played. Every boss a mountain, every climb unforgettable." },
+    { "id": 21,  "tag": "Storytelling",      "blurb": "The gold standard for open-world RPGs. Even the side quests outclass most games' main stories." },
+    { "id": 23,  "tag": "Atmosphere",        "blurb": "Night City feels alive. Phantom Liberty elevated the whole package into something I still think about." },
+    { "id": 3,  "tag": "Indie GOAT",        "blurb": "Stunning art, brutal-but-fair combat, and lore deeper than most AAA worlds. The indie benchmark." },
+    { "id": 22,  "tag": "Current Obsession", "blurb": "Redefining what an RPG can be. Every decision feels like it matters — and it actually does." }
   ],
   "achievements": [
     { "game": "Elden Ring",      "icon": "⚔️",  "title": "Elden Lord",          "desc": "Defeated Malenia, Blade of Miquella" },
     { "game": "Cyberpunk 2077",  "icon": "🌆",  "title": "All Endings Unlocked", "desc": "Experienced every path Night City offers" },
     { "game": "Hollow Knight",   "icon": "🦋",  "title": "Dream No More",        "desc": "True ending — defeated the Nightmare King" },
-    { "game": "Hades",           "icon": "🔱",  "title": "Heat 32 Clear",        "desc": "Max heat run with Extreme Measures 4 active" },
     { "game": "The Witcher 3",   "icon": "🐺",  "title": "Full Completion",      "desc": "100% of base game + both expansions cleared" },
     { "game": "Sekiro",          "icon": "🗡️",  "title": "All Endings",         "desc": "Achieved every possible conclusion" },
-    { "game": "Disco Elysium",   "icon": "🥃",  "title": "Thought Cabinet Full", "desc": "Every thought internalized. Consciousness expanded." },
     { "game": "Baldur's Gate 3", "icon": "🎲",  "title": "Dark Urge Run",        "desc": "Currently resisting the call… barely" },
     { "game": "Death Stranding", "icon": "📦",  "title": "Legend of Legends",    "desc": "Achieved max connection rating in every region" },
     { "game": "Control",         "icon": "🔮",  "title": "Bureau Director",      "desc": "All board countermeasures completed" }
