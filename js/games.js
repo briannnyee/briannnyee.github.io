@@ -8,6 +8,7 @@
   // ── Data (populated from data/games.json) ────────────────
   const GAMES = [];
   const ACHIEVEMENTS = [];
+  const TOP_PICKS = [];
 
   // ── DOM refs ─────────────────────────────────────────────
   const grid        = document.getElementById('games-grid');
@@ -211,6 +212,49 @@
     if (progressLabel)  progressLabel.textContent = `${pct}% COMPLETION RATE`;
   }
 
+  // ── Ming-Han's List — personal top picks ────────────────
+  function buildTopPicks() {
+    const wrap = document.getElementById('picks-list');
+    if (!wrap || !TOP_PICKS.length) return;
+
+    wrap.innerHTML = '';
+
+    TOP_PICKS.forEach((pick, idx) => {
+      const game = GAMES.find(g => g.id === pick.id);
+      if (!game) return;
+
+      const rank = String(idx + 1).padStart(2, '0');
+      const imgUrl = coverUrl(game);
+      const stars = Array.from({length: 5}, (_, i) =>
+        `<span class="star ${i < game.rating ? 'filled' : ''}">★</span>`
+      ).join('');
+
+      const el = document.createElement('div');
+      el.className = 'pick-item';
+      el.innerHTML = `
+        <div class="pick-rank">#${rank}</div>
+        <div class="pick-cover" style="background:${game.bg}">
+          <span class="pick-emoji">${game.emoji}</span>
+          ${imgUrl ? `<img src="${imgUrl}" alt="${game.title} cover" loading="lazy" onerror="this.style.display='none'">` : ''}
+        </div>
+        <div class="pick-body">
+          <div class="pick-tag">${pick.tag}</div>
+          <h3 class="pick-title">${game.title}</h3>
+          <div class="pick-meta">
+            <span>${game.genre}</span>
+            <span>·</span>
+            <span>${game.year}</span>
+            ${game.rating > 0 ? `<span class="pick-stars">${stars}</span>` : ''}
+          </div>
+          <p class="pick-blurb">${pick.blurb}</p>
+        </div>
+        <span class="pick-arrow" aria-hidden="true">→</span>
+      `;
+      el.addEventListener('click', () => openModal(game));
+      wrap.appendChild(el);
+    });
+  }
+
   // ── Achievements ticker ───────────────────────────────────
   function buildAchievements() {
     const wrap = document.getElementById('achievements-track');
@@ -280,7 +324,9 @@
     .then(function (data) {
       GAMES.push.apply(GAMES, data.games);
       ACHIEVEMENTS.push.apply(ACHIEVEMENTS, data.achievements);
+      if (data.topPicks) TOP_PICKS.push.apply(TOP_PICKS, data.topPicks);
       updateProgress();
+      buildTopPicks();
       buildAchievements();
       buildGrid();
     })

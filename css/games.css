@@ -539,6 +539,183 @@ body.modal-open {
   .game-modal__body { padding: 2rem 1.25rem 2rem; }
 }
 
+/* ── Ming-Han's List — personal top picks ─────────────── */
+.picks-section {
+  margin-bottom: 3rem;
+}
+
+.picks-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.picks-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.picks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pick-item {
+  display: grid;
+  grid-template-columns: auto 80px 1fr auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem 1rem 1.25rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+.pick-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--yellow);
+  box-shadow: var(--glow-y);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s;
+}
+
+.pick-item:hover {
+  border-color: rgba(252,238,9,0.4);
+  transform: translateX(4px);
+  box-shadow: 0 6px 24px rgba(252,238,9,0.08);
+}
+
+.pick-item:hover::before { transform: scaleY(1); }
+.pick-item:hover .pick-arrow { transform: translateX(4px); color: var(--yellow); }
+
+.pick-rank {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  min-width: 3.2rem;
+}
+
+.pick-cover {
+  width: 80px;
+  height: 110px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.pick-emoji {
+  font-size: 2.2rem;
+  position: relative;
+  z-index: 0;
+}
+
+.pick-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+}
+
+.pick-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.pick-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: var(--glow-c);
+}
+
+.pick-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.pick-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pick-stars {
+  margin-left: 0.3rem;
+  color: var(--yellow);
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+.pick-blurb {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+.pick-arrow {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--muted);
+  transition: transform 0.25s, color 0.25s;
+  padding-left: 0.5rem;
+}
+
+@media (max-width: 720px) {
+  .pick-item {
+    grid-template-columns: auto 64px 1fr;
+    gap: 0.9rem;
+    padding: 0.9rem 1rem;
+  }
+  .pick-rank { font-size: 1.6rem; min-width: 2.4rem; }
+  .pick-cover { width: 64px; height: 88px; }
+  .pick-title { font-size: 1.05rem; }
+  .pick-arrow { display: none; }
+  .pick-blurb { font-size: 0.8rem; }
+}
+
 /* ── Achievements ticker ────────────────────────────────── */
 .achievements-section {
   margin-bottom: 3rem;
