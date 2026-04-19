@@ -34,7 +34,7 @@
     "systemInfo": [
       { "key": "STATUS",     "value": "● AVAILABLE",  "color": "green"   },
       { "key": "LOCATION",   "value": "Zurich"},
-      { "key": "ROLE",       "value": "Software Eng."},
+      { "key": "ROLE",       "value": "Robotics & AI Eng."},
       { "key": "SPECIALTY",  "value": "AI & Robotics"},
       { "key": "TEA/DAY", "value": "TOO MANY","color": "magenta" },
       { "key": "GITHUB",     "value": "@briannnyee","href": "https://github.com/briannnyee" }

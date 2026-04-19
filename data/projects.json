@@ -5,7 +5,7 @@
     "category": "ai",
     "categoryLabel": "Robotics & AI",
     "year": "2025",
-    "title": "Golden Robo Retriever",
+    "title": "Voice-Commanded Quadruped Robot for Autonomous Object Retrieval",
     "desc": "A quadrupedal loco-manipulator powered by ACT (Action Chunking Transformer) with real-time voice interface, designed to retrieve anything human asks for.",
     "stack": [
       { "label": "ACT",      "color": "yellow"    },
