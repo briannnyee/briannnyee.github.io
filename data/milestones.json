@@ -30,10 +30,10 @@
         "icon": "🤖",
         "date": "2025.06 - 2026.01",
         "categoryLabel": "Work",
-        "title": "Research Engineer Intern",
+        "title": "Student Researcher",
         "org": "Robotics and AI Institute",
         "body": [
-          "Started my role as Research Engineer Intern and contributed to the research in model-based reinforcement learning."
+          "Started my role as Student Researcher and contributed to the research in model-based reinforcement learning."
         ],
         "tags": [
           { "label": "Isaac Lab",          "color": "green" },
