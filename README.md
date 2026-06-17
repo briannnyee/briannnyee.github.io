@@ -110,3 +110,11 @@ The cyberpunk aesthetic lives in `src/styles/global.css`:
 - **Shared components:** `.nav`, `.footer`, `.btn`, `.badge--{color}`, `.corner-box`, `.fade-up`, `.section-label`
 - **Scroll animations:** Add `fade-up` class → `glitch.js` reveals on scroll via IntersectionObserver
 - **Animated counters:** Add `data-count="N"` → `glitch.js` animates 0 → N on scroll-into-view
+
+## Visual features
+
+### Three.js neural network hero (index page)
+`src/pages/index.astro` embeds a bundled Three.js script that renders a WebGL particle scene behind the hero: 220 nodes with connection lines, mouse parallax via `scene.rotation` lerp, and a sine-pulse opacity animation. Falls back gracefully if WebGL is unavailable. Respects `prefers-reduced-motion`.
+
+### Procedural city background (all pages)
+`public/js/city-bg.js` renders a randomised cyberpunk cityscape on the fixed `#city-canvas` behind every page. Buildings, neon windows, rain particles, and occasional lightning are regenerated on each load. Respects `prefers-reduced-motion` (skips rain and lightning).
