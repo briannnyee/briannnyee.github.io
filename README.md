@@ -1,5 +1,7 @@
 # briannnyee.github.io
 
+> **Migration in progress:** The site is being migrated to Astro. The new project lives in `../personal_brand_website_astro/`. This repo contains the original static version and serves as reference for the migration.
+
 ## Overview
 
 Static personal portfolio site for Ming-Han Lee (`briannnyee.github.io`). Pure HTML/CSS/JS — no build tools, no npm, no framework. Open any `.html` file directly in a browser or use a local server for development.
