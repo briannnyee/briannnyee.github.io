@@ -532,16 +532,9 @@ mark.hl--green {
   margin-bottom: 0;
 }
 
-/* ── Reduced-motion: restore static layout ──────────────── */
+/* ── Reduced-motion: disable CSS transitions on cards ───── */
 @media (prefers-reduced-motion: reduce) {
-  #timeline-canvas,
-  #tl-overlay,
-  #tl-hud,
-  #scroll-spacer       { display: none !important; }
-
-  #milestone-filters.milestone-filters { position: static; }
-
-  #static-timeline { display: block !important; }
+  .tl-card { transition: none; }
 }
 
 /* ── Mobile adjustments ─────────────────────────────────── */

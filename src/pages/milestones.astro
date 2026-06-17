@@ -179,7 +179,9 @@ flatMilestones.forEach((m: any, i: number) => {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!prefersReduced && !!window.WebGLRenderingContext) {
+    // Only fall back to static if WebGL is truly unavailable.
+    // For reduced-motion users we still render the 3D scene but skip animation.
+    if (!!window.WebGLRenderingContext) {
       initTimeline3D();
     } else {
       const st = document.getElementById('static-timeline');
@@ -443,25 +445,30 @@ flatMilestones.forEach((m: any, i: number) => {
         const delta = Math.min((now - lastTime) / 1000, 0.05);
         lastTime = now;
 
-        // Smooth camera Z
-        currentCamZ += (targetCamZ - currentCamZ) * (1 - Math.exp(-8 * delta));
+        // Camera movement: smooth lerp normally, instant snap for reduced-motion
+        if (prefersReduced) {
+          currentCamZ = targetCamZ;
+        } else {
+          currentCamZ += (targetCamZ - currentCamZ) * (1 - Math.exp(-8 * delta));
+        }
         camera.position.z = currentCamZ;
-        // Look slightly ahead and slightly downward toward the grid floor
         camera.lookAt(0, -3, currentCamZ - 40);
 
-        // Rotate + pulse markers
+        // Markers: rotate + pulse only when motion is allowed
         markers.forEach((mesh, i) => {
-          mesh.rotation.y += delta * 0.8;
-          mesh.rotation.x += delta * 0.3;
+          if (!prefersReduced) {
+            mesh.rotation.y += delta * 0.8;
+            mesh.rotation.x += delta * 0.3;
+          }
           const dist      = Math.abs(currentCamZ - (-(i + 1) * SEGMENT));
           const proximity = Math.max(0, 1 - dist / PROX_D);
-          mesh.scale.setScalar(1 + proximity * 0.4 * Math.sin(now * 0.005));
+          if (!prefersReduced) mesh.scale.setScalar(1 + proximity * 0.4 * Math.sin(now * 0.005));
           if (markerMats[i].opacity > 0.5) {
             markerLights[i].intensity = 0.4 + proximity * 0.8;
           }
         });
 
-        spineMat.opacity = 0.35 + 0.12 * Math.sin(now * 0.001);
+        if (!prefersReduced) spineMat.opacity = 0.35 + 0.12 * Math.sin(now * 0.001);
 
         updateCards(currentCamZ);
         updateHUD(scrollProgress, currentCamZ);
