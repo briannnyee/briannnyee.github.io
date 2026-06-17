@@ -252,23 +252,25 @@ const resolvedStats = siteData.hero.stats.map((s: any) => ({
       scene.add(points);
 
       // ── Connection Lines ─────────────────────────────────────────────────
-      const LINE_DIST = 34;
-      const MAX_LINES = 450;
+      const LINE_DIST = 48;
+      const MAX_LINES = 600;
 
       const linePositions = new Float32Array(MAX_LINES * 2 * 3);
       const lineColors    = new Float32Array(MAX_LINES * 2 * 3);
       const lineGeo = new THREE.BufferGeometry();
+      lineGeo.setDrawRange(0, 0); // start with nothing drawn
       lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
       lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineColors, 3));
 
       const lineMat = new THREE.LineBasicMaterial({
         vertexColors: true,
         transparent: true,
-        opacity: 0.18,
+        opacity: 0.35,
       });
       const lines = new THREE.LineSegments(lineGeo, lineMat);
       scene.add(lines);
 
+      // Populate lines from initial particle positions before first render
       function updateLines() {
         let lIdx = 0;
         const pos = geo.attributes.position.array as Float32Array;
@@ -353,7 +355,7 @@ const resolvedStats = siteData.hero.stats.map((s: any) => ({
 
           // Pulse opacity on a slow sine
           mat.opacity = 0.65 + Math.sin(t * 0.8) * 0.12;
-          lineMat.opacity = 0.14 + Math.sin(t * 0.6) * 0.06;
+          lineMat.opacity = 0.30 + Math.sin(t * 0.6) * 0.10;
 
           // Mouse parallax — lerp toward target
           currentRotX += (targetRotX - currentRotX) * 0.04;
@@ -365,6 +367,7 @@ const resolvedStats = siteData.hero.stats.map((s: any) => ({
         renderer.render(scene, camera);
       }
 
+      updateLines(); // build initial connections before first render
       animate();
     }
   </script>
