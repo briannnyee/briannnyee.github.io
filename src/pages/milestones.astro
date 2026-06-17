@@ -56,6 +56,9 @@ flatMilestones.forEach((m: any, i: number) => {
     ))}
   </div>
 
+  <!-- 2D/3D toggle button -->
+  <button id="tl-toggle" aria-label="Switch to 2D view">[ 2D VIEW ]</button>
+
   <!-- HUD panel: year + progress -->
   <div id="tl-hud">
     <div id="tl-hud__year">—</div>
@@ -194,6 +197,8 @@ flatMilestones.forEach((m: any, i: number) => {
       if (o) o.style.display = 'none';
       const f = document.getElementById('milestone-filters');
       if (f) (f as HTMLElement).style.position = 'static';
+      const tb = document.getElementById('tl-toggle');
+      if (tb) (tb as HTMLElement).style.display = 'none';
     }
 
     function initTimeline3D() {
@@ -475,6 +480,26 @@ flatMilestones.forEach((m: any, i: number) => {
 
         renderer.render(scene, camera);
       }
+
+      // ── 2D / 3D toggle ───────────────────────────────────────────────────
+      let is3D = true;
+      const toggleBtn = document.getElementById('tl-toggle') as HTMLButtonElement;
+
+      function set3D(enable: boolean) {
+        is3D = enable;
+        const ids3D = ['timeline-canvas', 'scroll-spacer', 'tl-overlay', 'tl-hud', 'milestone-filters'];
+        ids3D.forEach(id => {
+          const el = document.getElementById(id) as HTMLElement | null;
+          if (el) el.style.display = enable ? '' : 'none';
+        });
+        const staticTl = document.getElementById('static-timeline') as HTMLElement | null;
+        if (staticTl) staticTl.style.display = enable ? 'none' : '';
+        toggleBtn.textContent = enable ? '[ 2D VIEW ]' : '[ 3D VIEW ]';
+        toggleBtn.setAttribute('aria-label', enable ? 'Switch to 2D view' : 'Switch to 3D view');
+        window.scrollTo(0, 0);
+      }
+
+      toggleBtn.addEventListener('click', () => set3D(!is3D));
 
       requestAnimationFrame(animate);
     }
