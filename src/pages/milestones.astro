@@ -5,83 +5,154 @@ import '../styles/projects.css';
 import '../styles/milestones.css';
 
 import milestonesData from '../data/milestones.json';
+
+// Flatten grouped milestones for 3D scene
+const flatMilestones = (milestonesData as any[]).flatMap((g: any) =>
+  g.entries.map((e: any) => ({ ...e, year: g.year }))
+);
+
+// Year boundaries for floating labels
+const yearBoundaries: { year: string; firstIndex: number }[] = [];
+const seenYears = new Set<string>();
+flatMilestones.forEach((m: any, i: number) => {
+  if (!seenYears.has(m.year)) {
+    seenYears.add(m.year);
+    yearBoundaries.push({ year: m.year, firstIndex: i });
+  }
+});
 ---
 
 <Base title="Milestones — Ming-Han Lee">
-  <main class="milestones-page container">
 
-    <header class="section-header fade-up">
-      <span class="section-label">// MILESTONES.timeline</span>
-      <h1 class="section-title"><span class="slash-deco">/</span>The <em>Journey</em></h1>
-      <div class="section-line"></div>
-    </header>
+  <!-- Three.js 3D timeline canvas -->
+  <canvas id="timeline-canvas" aria-hidden="true"></canvas>
 
-    <div class="milestone-filters filter-bar fade-up" id="milestone-filters">
-      <button class="filter-btn active" data-cat="all">All</button>
-      <button class="filter-btn" data-cat="education">Education</button>
-      <button class="filter-btn" data-cat="work">Work</button>
-      <button class="filter-btn" data-cat="award">Awards</button>
-      <button class="filter-btn" data-cat="cert">Certifications</button>
-      <button class="filter-btn" data-cat="launch">Launches</button>
+  <!-- Scroll spacer: creates virtual page height so browser scroll exists -->
+  <div id="scroll-spacer"></div>
+
+  <!-- Fixed overlay with holographic milestone cards -->
+  <div id="tl-overlay" aria-live="polite">
+    {flatMilestones.map((e: any, i: number) => (
+      <div
+        class={`tl-card tl-card--${e.side} tl-card--${e.category}`}
+        data-index={i}
+        data-category={e.category}
+        aria-hidden="true"
+      >
+        <div class="tl-card__header">
+          <span class="tl-card__date">{e.date}</span>
+          <span class="tl-card__cat">{e.categoryLabel}</span>
+        </div>
+        <div class="tl-card__icon">{e.icon}</div>
+        <div class="tl-card__title">{e.title}</div>
+        <div class="tl-card__org">{e.org}</div>
+        <div class="tl-card__body">
+          {e.body.map((p: string) => <p set:html={p} />)}
+        </div>
+        <div class="tl-card__tags">
+          {e.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- HUD panel: year + progress -->
+  <div id="tl-hud">
+    <div id="tl-hud__year">—</div>
+    <div id="tl-hud__label">// TIMELINE.3D</div>
+    <div id="tl-hud__bar-track">
+      <div id="tl-hud__bar-fill"></div>
     </div>
+    <div id="tl-hud__progress">0%</div>
+  </div>
 
-    <div class="timeline" id="timeline">
-      {(milestonesData as any[]).map(group => (
-        <>
-          <div class="timeline-year">
-            <span class="timeline-year__label">{group.year}</span>
-          </div>
-          {group.entries.map((e: any) => {
-            const card = (
-              <div class="milestone__card">
-                <div class="milestone__header">
-                  <span class="milestone__date">{e.date}</span>
-                  <span class="milestone__cat-badge">{e.categoryLabel}</span>
+  <!-- Filter bar (fixed during 3D mode) -->
+  <div class="milestone-filters" id="milestone-filters">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="education">Education</button>
+    <button class="filter-btn" data-cat="work">Work</button>
+    <button class="filter-btn" data-cat="award">Awards</button>
+    <button class="filter-btn" data-cat="cert">Certifications</button>
+    <button class="filter-btn" data-cat="launch">Launches</button>
+  </div>
+
+  <!-- Static timeline fallback (shown on reduced-motion / no WebGL) -->
+  <div id="static-timeline" style="display:none">
+    <main class="milestones-page container">
+      <header class="section-header fade-up">
+        <span class="section-label">// MILESTONES.timeline</span>
+        <h1 class="section-title"><span class="slash-deco">/</span>The <em>Journey</em></h1>
+        <div class="section-line"></div>
+      </header>
+
+      <div class="milestone-filters filter-bar fade-up" id="milestone-filters-static">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="education">Education</button>
+        <button class="filter-btn" data-cat="work">Work</button>
+        <button class="filter-btn" data-cat="award">Awards</button>
+        <button class="filter-btn" data-cat="cert">Certifications</button>
+        <button class="filter-btn" data-cat="launch">Launches</button>
+      </div>
+
+      <div class="timeline" id="timeline">
+        {(milestonesData as any[]).map((group: any) => (
+          <>
+            <div class="timeline-year">
+              <span class="timeline-year__label">{group.year}</span>
+            </div>
+            {group.entries.map((e: any) => {
+              const card = (
+                <div class="milestone__card">
+                  <div class="milestone__header">
+                    <span class="milestone__date">{e.date}</span>
+                    <span class="milestone__cat-badge">{e.categoryLabel}</span>
+                  </div>
+                  <div class="milestone__title">{e.title}</div>
+                  <div class="milestone__org">{e.org}</div>
+                  <div class="milestone__body">
+                    {e.body.map((p: string) => <p set:html={p} />)}
+                  </div>
+                  <div class="milestone__tags">
+                    {e.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+                  </div>
                 </div>
-                <div class="milestone__title">{e.title}</div>
-                <div class="milestone__org">{e.org}</div>
-                <div class="milestone__body">
-                  {e.body.map((p: string) => <p>{p}</p>)}
+              );
+              const dot = (
+                <div class="milestone__dot">
+                  <div class="milestone__dot-icon">{e.icon}</div>
                 </div>
-                <div class="milestone__tags">
-                  {e.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+              );
+              const empty = <div class="milestone__empty"></div>;
+              return (
+                <div class="milestone fade-up" data-cat={e.category}>
+                  {e.side === 'right' ? <>{empty}{dot}{card}</> : <>{card}{dot}{empty}</>}
                 </div>
-              </div>
-            );
-            const dot = (
-              <div class="milestone__dot">
-                <div class="milestone__dot-icon">{e.icon}</div>
-              </div>
-            );
-            const empty = <div class="milestone__empty"></div>;
+              );
+            })}
+          </>
+        ))}
+        <div class="timeline-end"><div class="timeline-end__dot"></div></div>
+      </div>
+    </main>
+  </div>
 
-            return (
-              <div class="milestone fade-up" data-cat={e.category}>
-                {e.side === 'right' ? <>{empty}{dot}{card}</> : <>{card}{dot}{empty}</>}
-              </div>
-            );
-          })}
-        </>
-      ))}
-      <div class="timeline-end"><div class="timeline-end__dot"></div></div>
-    </div>
+  <!-- Milestone data for client -->
+  <script is:inline define:vars={{ flatMilestones, yearBoundaries }}>
+    window.__milestones = flatMilestones;
+    window.__yearBoundaries = yearBoundaries;
+  </script>
 
-  </main>
-
+  <!-- Static fallback filter logic -->
   <script is:inline>
-    (function() {
-      var milestones = document.querySelectorAll('.milestone[data-cat]');
-      document.querySelectorAll('#milestone-filters .filter-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('#milestone-filters .filter-btn').forEach(function(b) {
-            b.classList.remove('active');
-          });
+    (function () {
+      var milestones = document.querySelectorAll('#static-timeline .milestone[data-cat]');
+      document.querySelectorAll('#milestone-filters-static .filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('#milestone-filters-static .filter-btn').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
           var cat = btn.dataset.cat;
-          milestones.forEach(function(m) {
-            m.classList.toggle('hidden', cat !== 'all' && m.dataset.cat !== cat);
-          });
-          document.querySelectorAll('.timeline-year').forEach(function(yr) {
+          milestones.forEach(function (m) { m.classList.toggle('hidden', cat !== 'all' && m.dataset.cat !== cat); });
+          document.querySelectorAll('#static-timeline .timeline-year').forEach(function (yr) {
             var next = yr.nextElementSibling;
             var hasVisible = false;
             while (next && !next.classList.contains('timeline-year') && !next.classList.contains('timeline-end')) {
@@ -94,4 +165,307 @@ import milestonesData from '../data/milestones.json';
       });
     })();
   </script>
+
+  <!-- Three.js 3D Timeline (bundled by Astro/Vite so import works) -->
+  <script>
+    import * as THREE from 'three';
+
+    declare global {
+      interface Window {
+        __milestones: any[];
+        __yearBoundaries: { year: string; firstIndex: number }[];
+      }
+    }
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReduced && !!window.WebGLRenderingContext) {
+      initTimeline3D();
+    } else {
+      const st = document.getElementById('static-timeline');
+      if (st) st.style.display = '';
+      const c = document.getElementById('timeline-canvas') as HTMLElement | null;
+      if (c) c.style.display = 'none';
+      const h = document.getElementById('tl-hud');
+      if (h) h.style.display = 'none';
+      const o = document.getElementById('tl-overlay');
+      if (o) o.style.display = 'none';
+      const f = document.getElementById('milestone-filters');
+      if (f) (f as HTMLElement).style.position = 'static';
+    }
+
+    function initTimeline3D() {
+      const milestoneData: any[] = window.__milestones;
+      const yearBoundaries: { year: string; firstIndex: number }[] = window.__yearBoundaries;
+      const N = milestoneData.length;
+
+      const SEGMENT   = 120;
+      const CAM_START = 20;
+      const CAM_END   = -(N + 1) * SEGMENT;
+      const PROX_D    = 55;
+
+      const CATEGORY_COLORS: Record<string, number> = {
+        education: 0x00F5FF,
+        work:      0x39FF14,
+        award:     0xFCEE09,
+        cert:      0xFF006E,
+        launch:    0x00F5FF,
+      };
+
+      // Force scrollbar to prevent layout shift
+      document.body.style.overflowY = 'scroll';
+
+      // Set virtual scroll height
+      const scrollSpacer = document.getElementById('scroll-spacer')!;
+      scrollSpacer.style.height = `${(N + 3) * 100}vh`;
+
+      // ── Renderer ────────────────────────────────────────────────────────
+      const canvas = document.getElementById('timeline-canvas') as HTMLCanvasElement;
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // ── Scene + fog ─────────────────────────────────────────────────────
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x000000, 0.004);
+
+      // ── Camera ──────────────────────────────────────────────────────────
+      const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1200);
+      camera.position.set(0, 2, CAM_START);
+
+      // ── Lights ──────────────────────────────────────────────────────────
+      scene.add(new THREE.AmbientLight(0x111122, 0.5));
+      const dirLight = new THREE.DirectionalLight(0x00F5FF, 0.15);
+      dirLight.position.set(0, 50, 0);
+      scene.add(dirLight);
+
+      // ── Grid floor ──────────────────────────────────────────────────────
+      const gridBase = new THREE.GridHelper(1200, 100, 0x0d1a00, 0x0d1a00);
+      gridBase.position.y = -10;
+      scene.add(gridBase);
+
+      const gridCenter = new THREE.GridHelper(1200, 8, 0x3a3500, 0x1a1a00);
+      gridCenter.position.y = -9.9;
+      scene.add(gridCenter);
+
+      // Center runway line
+      const runwayLen = Math.abs(CAM_END) + 60;
+      const runway = new THREE.Mesh(
+        new THREE.BoxGeometry(0.15, 0.05, runwayLen),
+        new THREE.MeshBasicMaterial({ color: 0xFCEE09, transparent: true, opacity: 0.6 })
+      );
+      runway.position.set(0, -9.8, (CAM_START + CAM_END) / 2);
+      scene.add(runway);
+
+      // ── Timeline spine ───────────────────────────────────────────────────
+      const spineCtrlPts = [
+        new THREE.Vector3(0, 0, CAM_START + 10),
+        ...Array.from({ length: N }, (_, i) => new THREE.Vector3(0, 0, -(i + 1) * SEGMENT)),
+        new THREE.Vector3(0, 0, CAM_END - 10),
+      ];
+      const spineCurve = new THREE.CatmullRomCurve3(spineCtrlPts);
+      const spineMat = new THREE.LineBasicMaterial({ color: 0xFCEE09, transparent: true, opacity: 0.25 });
+      const spineLine = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(spineCurve.getPoints(200)),
+        spineMat
+      );
+      scene.add(spineLine);
+
+      // ── Milestone markers ────────────────────────────────────────────────
+      const markers: THREE.Mesh[] = [];
+      const markerMats: THREE.MeshBasicMaterial[] = [];
+      const markerLights: THREE.PointLight[] = [];
+
+      milestoneData.forEach((m: any, i: number) => {
+        const x = m.side === 'left' ? -20 : 20;
+        const z = -(i + 1) * SEGMENT;
+        const color = CATEGORY_COLORS[m.category] ?? 0xFCEE09;
+
+        const mat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 1.0 });
+        const mesh = new THREE.Mesh(new THREE.OctahedronGeometry(2.5, 0), mat);
+        mesh.position.set(x, 0, z);
+        scene.add(mesh);
+        markers.push(mesh);
+        markerMats.push(mat);
+
+        const light = new THREE.PointLight(color, 0.8, 60, 2);
+        light.position.set(x, 0, z);
+        scene.add(light);
+        markerLights.push(light);
+
+        // Horizontal connector: spine → marker
+        scene.add(new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(0, 0, z),
+            new THREE.Vector3(x, 0, z),
+          ]),
+          new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.3 })
+        ));
+      });
+
+      // ── Year label sprites ───────────────────────────────────────────────
+      function makeYearSprite(year: string): THREE.Sprite {
+        const c2 = document.createElement('canvas');
+        c2.width = 512; c2.height = 128;
+        const ctx = c2.getContext('2d')!;
+        ctx.fillStyle = 'rgba(252,238,9,0.08)';
+        ctx.fillRect(0, 0, 512, 128);
+        ctx.strokeStyle = 'rgba(252,238,9,0.55)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(1, 1, 510, 126);
+        ctx.font = 'bold 72px Rajdhani, sans-serif';
+        ctx.fillStyle = '#FCEE09';
+        ctx.shadowColor = '#FCEE09';
+        ctx.shadowBlur = 18;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(year, 256, 64);
+        const sprite = new THREE.Sprite(
+          new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c2), transparent: true, opacity: 0.9 })
+        );
+        sprite.scale.set(32, 8, 1);
+        return sprite;
+      }
+
+      document.fonts.ready.then(() => {
+        yearBoundaries.forEach(({ year, firstIndex }) => {
+          const sprite = makeYearSprite(year);
+          sprite.position.set(0, 6, -(firstIndex + 0.5) * SEGMENT);
+          scene.add(sprite);
+        });
+      });
+
+      // ── Particles ────────────────────────────────────────────────────────
+      const PC = 300;
+      const pPos = new Float32Array(PC * 3);
+      const pCol = new Float32Array(PC * 3);
+      const palette = [new THREE.Color(0x00F5FF), new THREE.Color(0xFCEE09), new THREE.Color(0xFF006E)];
+      for (let i = 0; i < PC; i++) {
+        const i3 = i * 3;
+        const angle = Math.random() * Math.PI * 2;
+        const r = Math.random() * 25;
+        pPos[i3]     = Math.cos(angle) * r;
+        pPos[i3 + 1] = Math.sin(angle) * r * 0.4;
+        pPos[i3 + 2] = CAM_START + Math.random() * (CAM_END - CAM_START);
+        const rnd = Math.random();
+        const col = rnd < 0.55 ? palette[0] : rnd < 0.85 ? palette[1] : palette[2];
+        pCol[i3] = col.r; pCol[i3 + 1] = col.g; pCol[i3 + 2] = col.b;
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      pGeo.setAttribute('color',    new THREE.BufferAttribute(pCol, 3));
+      scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({
+        size: 0.8, vertexColors: true, transparent: true, opacity: 0.55, sizeAttenuation: true,
+      })));
+
+      // ── DOM references ───────────────────────────────────────────────────
+      const cards = Array.from(document.querySelectorAll<HTMLElement>('.tl-card'));
+      const hudYear     = document.getElementById('tl-hud__year')!;
+      const hudBarFill  = document.getElementById('tl-hud__bar-fill')!;
+      const hudProgress = document.getElementById('tl-hud__progress')!;
+
+      // ── Scroll state ─────────────────────────────────────────────────────
+      let scrollProgress = 0;
+      let targetCamZ  = CAM_START;
+      let currentCamZ = CAM_START;
+
+      function onScroll() {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress = maxScroll > 0 ? Math.max(0, Math.min(1, window.scrollY / maxScroll)) : 0;
+        targetCamZ = CAM_START + scrollProgress * (CAM_END - CAM_START);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // ── Filter logic ──────────────────────────────────────────────────────
+      let activeFilter = 'all';
+      document.querySelectorAll<HTMLElement>('#milestone-filters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#milestone-filters .filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.cat ?? 'all';
+          markers.forEach((_, i) => {
+            const match = activeFilter === 'all' || milestoneData[i].category === activeFilter;
+            markerMats[i].opacity       = match ? 1.0 : 0.08;
+            markerLights[i].intensity   = match ? 0.8 : 0;
+          });
+        });
+      });
+
+      // ── Year zone helper ──────────────────────────────────────────────────
+      function getYearAtZ(z: number): string {
+        for (const { year, firstIndex } of yearBoundaries) {
+          if (z > -(firstIndex + 0.5) * SEGMENT) return year;
+        }
+        return yearBoundaries[yearBoundaries.length - 1]?.year ?? '';
+      }
+
+      // ── Card & HUD update ─────────────────────────────────────────────────
+      function updateCards(cameraZ: number) {
+        milestoneData.forEach((_: any, i: number) => {
+          const dist    = Math.abs(cameraZ - (-(i + 1) * SEGMENT));
+          const matches = activeFilter === 'all' || milestoneData[i].category === activeFilter;
+          const active  = dist < PROX_D && matches;
+          const card    = cards[i];
+          if (!card) return;
+          card.classList.toggle('active', active);
+          card.setAttribute('aria-hidden', String(!active));
+        });
+      }
+
+      function updateHUD(progress: number, cameraZ: number) {
+        hudBarFill.style.width   = `${(progress * 100).toFixed(1)}%`;
+        hudProgress.textContent  = `${Math.round(progress * 100)}%`;
+        const yr = getYearAtZ(cameraZ);
+        if (hudYear.textContent !== yr) hudYear.textContent = yr;
+      }
+
+      // ── Resize ────────────────────────────────────────────────────────────
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // ── Animation loop ────────────────────────────────────────────────────
+      let lastTime = 0;
+      let hidden   = false;
+      document.addEventListener('visibilitychange', () => { hidden = document.hidden; });
+
+      function animate(now: number) {
+        requestAnimationFrame(animate);
+        if (hidden) return;
+
+        const delta = Math.min((now - lastTime) / 1000, 0.05);
+        lastTime = now;
+
+        // Smooth camera Z
+        currentCamZ += (targetCamZ - currentCamZ) * (1 - Math.exp(-8 * delta));
+        camera.position.z = currentCamZ;
+        camera.lookAt(0, 0, currentCamZ - 30);
+
+        // Rotate + pulse markers
+        markers.forEach((mesh, i) => {
+          mesh.rotation.y += delta * 0.8;
+          mesh.rotation.x += delta * 0.3;
+          const dist      = Math.abs(currentCamZ - (-(i + 1) * SEGMENT));
+          const proximity = Math.max(0, 1 - dist / PROX_D);
+          mesh.scale.setScalar(1 + proximity * 0.4 * Math.sin(now * 0.005));
+          if (markerMats[i].opacity > 0.5) {
+            markerLights[i].intensity = 0.4 + proximity * 0.8;
+          }
+        });
+
+        spineMat.opacity = 0.2 + 0.08 * Math.sin(now * 0.001);
+
+        updateCards(currentCamZ);
+        updateHUD(scrollProgress, currentCamZ);
+
+        renderer.render(scene, camera);
+      }
+
+      requestAnimationFrame(animate);
+    }
+  </script>
+
 </Base>

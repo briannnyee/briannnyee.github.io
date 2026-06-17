@@ -305,7 +305,268 @@ mark.hl--green {
   50%       { box-shadow: 0 0 20px rgba(252,238,9,0.9); transform: scale(1.4); }
 }
 
-/* ── Responsive — single column ─────────────────────────── */
+/* ============================================================
+   3D TIMELINE ADDITIONS
+   ============================================================ */
+
+/* Three.js canvas — above city-bg (-1), below nav (1000) */
+#timeline-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* Scroll spacer — creates virtual page height; all else is fixed */
+#scroll-spacer {
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+/* Fixed overlay for holographic cards */
+#tl-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Milestone holographic cards ────────────────────────── */
+.tl-card {
+  position: absolute;
+  top: 50%;
+  width: min(420px, 38vw);
+  max-height: 72vh;
+  overflow-y: auto;
+  pointer-events: auto;
+
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--card-color, var(--yellow));
+  border-top: 2px solid var(--card-color, var(--yellow));
+  box-shadow:
+    0 0 24px rgba(0, 0, 0, 0.7),
+    inset 0 0 16px rgba(0, 0, 0, 0.4),
+    0 0 8px var(--card-color, var(--yellow));
+  padding: 1.5rem;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tl-card::-webkit-scrollbar          { width: 3px; }
+.tl-card::-webkit-scrollbar-thumb    { background: var(--card-color, var(--yellow)); }
+.tl-card::-webkit-scrollbar-track    { background: transparent; }
+
+/* Left cards: anchor left, start off-screen left */
+.tl-card--left {
+  left: 3vw;
+  right: auto;
+  transform: translateY(-50%) translateX(-120%);
+}
+
+/* Right cards: anchor right, start off-screen right */
+.tl-card--right {
+  right: 3vw;
+  left: auto;
+  transform: translateY(-50%) translateX(120%);
+}
+
+/* Active: slide to resting position */
+.tl-card--left.active  { opacity: 1; transform: translateY(-50%) translateX(0); }
+.tl-card--right.active { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+/* Category color tokens */
+.tl-card--education { --card-color: var(--cyan); }
+.tl-card--work      { --card-color: var(--green); }
+.tl-card--award     { --card-color: var(--yellow); }
+.tl-card--cert      { --card-color: var(--magenta); }
+.tl-card--launch    { --card-color: var(--cyan); }
+
+/* Card internals */
+.tl-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tl-card__date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+  white-space: nowrap;
+}
+
+.tl-card__cat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--card-color, var(--yellow));
+  border: 1px solid var(--card-color, var(--yellow));
+  padding: 1px 6px;
+}
+
+.tl-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+  line-height: 1;
+}
+
+.tl-card__title {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+.tl-card__org {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.tl-card__body {
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.85;
+  line-height: 1.75;
+}
+
+.tl-card__body p + p { margin-top: 0.4rem; }
+
+.tl-card__body a {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.tl-card__body a:hover {
+  color: var(--yellow);
+  border-color: rgba(252, 238, 9, 0.5);
+  text-shadow: var(--glow-y);
+}
+
+.tl-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.85rem;
+}
+
+/* ── HUD panel ──────────────────────────────────────────── */
+#tl-hud {
+  position: fixed;
+  top: calc(var(--nav-h) + 5rem);
+  left: 2rem;
+  z-index: 5;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--yellow);
+  text-shadow: var(--glow-y);
+}
+
+#tl-hud__year {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+#tl-hud__label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-shadow: none;
+  margin-bottom: 0.5rem;
+}
+
+#tl-hud__bar-track {
+  width: 100px;
+  height: 2px;
+  background: rgba(252, 238, 9, 0.15);
+  margin-bottom: 0.3rem;
+}
+
+#tl-hud__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--yellow);
+  box-shadow: var(--glow-y);
+  transition: width 0.1s linear;
+}
+
+#tl-hud__progress {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+/* ── Fixed filter bar (3D mode) ─────────────────────────── */
+#milestone-filters.milestone-filters {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 2rem;
+  margin-bottom: 0;
+}
+
+/* ── Reduced-motion: restore static layout ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #timeline-canvas,
+  #tl-overlay,
+  #tl-hud,
+  #scroll-spacer       { display: none !important; }
+
+  #milestone-filters.milestone-filters { position: static; }
+
+  #static-timeline { display: block !important; }
+}
+
+/* ── Mobile adjustments ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .tl-card {
+    width: min(88vw, 360px);
+  }
+
+  .tl-card--left,
+  .tl-card--right {
+    left: 50%;
+    right: auto;
+  }
+
+  .tl-card--left  { transform: translateY(-50%) translateX(calc(-50% - 120%)); }
+  .tl-card--right { transform: translateY(-50%) translateX(calc(-50% + 120%)); }
+
+  .tl-card--left.active,
+  .tl-card--right.active { transform: translateY(-50%) translateX(-50%); }
+
+  #tl-hud { left: 1rem; }
+  #tl-hud__year { font-size: 1.4rem; }
+}
+
+/* ── Static timeline responsive — single column ─────────── */
 @media (max-width: 768px) {
   .timeline::before {
     left: 22px;

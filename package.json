@@ -12,10 +12,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.4.7"
+    "astro": "^6.4.7",
+    "three": "^0.184.0"
   },
   "allowScripts": {
     "esbuild@0.27.7": true,
-    "sharp@0.34.5": true
+    "sharp@0.34.5": true,
+    "fsevents@2.3.3": true
+  },
+  "devDependencies": {
+    "@types/three": "^0.184.1"
   }
 }
