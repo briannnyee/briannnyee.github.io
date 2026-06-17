@@ -24,8 +24,8 @@ const resolvedStats = siteData.hero.stats.map((s: any) => ({
 ---
 
 <Base title="MING-HAN LEE — Portfolio">
-  <!-- Animated grid background -->
-  <div class="hero-grid" aria-hidden="true"></div>
+  <!-- Three.js neural network background (replaces CSS grid) -->
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
   <!-- Hero -->
   <section class="hero container">
@@ -171,5 +171,201 @@ const resolvedStats = siteData.hero.stats.map((s: any) => ({
       setTimeout(tick, 800);
       if (window.GlitchUtils) window.GlitchUtils.setupCounters();
     })();
+  </script>
+
+  <!-- Three.js neural network particle scene — Astro bundles this -->
+  <script>
+    import * as THREE from 'three';
+
+    const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+    if (!canvas) throw new Error('hero-canvas not found');
+
+    // Graceful degradation: skip if no WebGL
+    if (!window.WebGLRenderingContext) {
+      canvas.style.display = 'none';
+      (document.querySelector('.hero-grid-fallback') as HTMLElement | null)?.style.setProperty('display', 'block');
+    } else {
+      initScene(canvas);
+    }
+
+    function initScene(canvas: HTMLCanvasElement) {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ── Renderer ────────────────────────────────────────────────────────
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // ── Scene & Camera ──────────────────────────────────────────────────
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);
+      camera.position.z = 120;
+
+      // ── Particle System ─────────────────────────────────────────────────
+      const PARTICLE_COUNT = 220;
+      const BOX = { x: 130, y: 80, z: 70 };
+
+      // Positions and velocities
+      const positions = new Float32Array(PARTICLE_COUNT * 3);
+      const colors    = new Float32Array(PARTICLE_COUNT * 3);
+      const velocities: number[][] = [];
+
+      const palette = [
+        new THREE.Color('#00F5FF'), // cyan  — 60%
+        new THREE.Color('#FCEE09'), // yellow — 30%
+        new THREE.Color('#FF006E'), // magenta — 10%
+      ];
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const i3 = i * 3;
+        positions[i3]     = (Math.random() - 0.5) * BOX.x * 2;
+        positions[i3 + 1] = (Math.random() - 0.5) * BOX.y * 2;
+        positions[i3 + 2] = (Math.random() - 0.5) * BOX.z * 2;
+
+        const spd = 0.04 + Math.random() * 0.06;
+        velocities.push([
+          (Math.random() - 0.5) * spd,
+          (Math.random() - 0.5) * spd,
+          (Math.random() - 0.5) * spd * 0.3,
+        ]);
+
+        const r = Math.random();
+        const col = r < 0.6 ? palette[0] : r < 0.9 ? palette[1] : palette[2];
+        colors[i3]     = col.r;
+        colors[i3 + 1] = col.g;
+        colors[i3 + 2] = col.b;
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const mat = new THREE.PointsMaterial({
+        size: 1.4,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.75,
+        sizeAttenuation: true,
+      });
+
+      const points = new THREE.Points(geo, mat);
+      scene.add(points);
+
+      // ── Connection Lines ─────────────────────────────────────────────────
+      const LINE_DIST = 34;
+      const MAX_LINES = 450;
+
+      const linePositions = new Float32Array(MAX_LINES * 2 * 3);
+      const lineColors    = new Float32Array(MAX_LINES * 2 * 3);
+      const lineGeo = new THREE.BufferGeometry();
+      lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+      lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineColors, 3));
+
+      const lineMat = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.18,
+      });
+      const lines = new THREE.LineSegments(lineGeo, lineMat);
+      scene.add(lines);
+
+      function updateLines() {
+        let lIdx = 0;
+        const pos = geo.attributes.position.array as Float32Array;
+        const col = geo.attributes.color.array as Float32Array;
+
+        for (let a = 0; a < PARTICLE_COUNT && lIdx < MAX_LINES; a++) {
+          for (let b = a + 1; b < PARTICLE_COUNT && lIdx < MAX_LINES; b++) {
+            const ax = pos[a * 3], ay = pos[a * 3 + 1], az = pos[a * 3 + 2];
+            const bx = pos[b * 3], by = pos[b * 3 + 1], bz = pos[b * 3 + 2];
+            const dist = Math.sqrt((ax-bx)**2 + (ay-by)**2 + (az-bz)**2);
+
+            if (dist < LINE_DIST) {
+              const li = lIdx * 6;
+              linePositions[li]     = ax; linePositions[li + 1] = ay; linePositions[li + 2] = az;
+              linePositions[li + 3] = bx; linePositions[li + 4] = by; linePositions[li + 5] = bz;
+              // Blend colors of the two particles
+              lineColors[li]     = (col[a*3]     + col[b*3])     / 2;
+              lineColors[li + 1] = (col[a*3 + 1] + col[b*3 + 1]) / 2;
+              lineColors[li + 2] = (col[a*3 + 2] + col[b*3 + 2]) / 2;
+              lineColors[li + 3] = lineColors[li];
+              lineColors[li + 4] = lineColors[li + 1];
+              lineColors[li + 5] = lineColors[li + 2];
+              lIdx++;
+            }
+          }
+        }
+
+        lineGeo.setDrawRange(0, lIdx * 2);
+        lineGeo.attributes.position.needsUpdate = true;
+        lineGeo.attributes.color.needsUpdate = true;
+      }
+
+      // ── Mouse parallax ───────────────────────────────────────────────────
+      let targetRotX = 0, targetRotY = 0;
+      let currentRotX = 0, currentRotY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        targetRotY = ((e.clientX / window.innerWidth)  - 0.5) * 0.15;
+        targetRotX = ((e.clientY / window.innerHeight) - 0.5) * -0.10;
+      });
+
+      // ── Resize ───────────────────────────────────────────────────────────
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // ── Animation loop ───────────────────────────────────────────────────
+      let hidden = false;
+      document.addEventListener('visibilitychange', () => { hidden = document.hidden; });
+
+      let frame = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        if (hidden) return;
+
+        frame++;
+        const t = frame * 0.01;
+
+        if (!prefersReduced) {
+          // Move particles
+          const pos = geo.attributes.position.array as Float32Array;
+          for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const i3 = i * 3;
+            pos[i3]     += velocities[i][0];
+            pos[i3 + 1] += velocities[i][1];
+            pos[i3 + 2] += velocities[i][2];
+
+            // Wrap around box edges
+            if (pos[i3]     >  BOX.x) pos[i3]     = -BOX.x;
+            if (pos[i3]     < -BOX.x) pos[i3]     =  BOX.x;
+            if (pos[i3 + 1] >  BOX.y) pos[i3 + 1] = -BOX.y;
+            if (pos[i3 + 1] < -BOX.y) pos[i3 + 1] =  BOX.y;
+            if (pos[i3 + 2] >  BOX.z) pos[i3 + 2] = -BOX.z;
+            if (pos[i3 + 2] < -BOX.z) pos[i3 + 2] =  BOX.z;
+          }
+          geo.attributes.position.needsUpdate = true;
+
+          // Update connections every 2 frames (perf)
+          if (frame % 2 === 0) updateLines();
+
+          // Pulse opacity on a slow sine
+          mat.opacity = 0.65 + Math.sin(t * 0.8) * 0.12;
+          lineMat.opacity = 0.14 + Math.sin(t * 0.6) * 0.06;
+
+          // Mouse parallax — lerp toward target
+          currentRotX += (targetRotX - currentRotX) * 0.04;
+          currentRotY += (targetRotY - currentRotY) * 0.04;
+          scene.rotation.x = currentRotX;
+          scene.rotation.y = currentRotY;
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
   </script>
 </Base>

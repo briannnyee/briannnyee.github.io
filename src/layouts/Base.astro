@@ -25,6 +25,8 @@ const {
 </head>
 <body>
 
+  <canvas id="city-canvas" aria-hidden="true"></canvas>
+
   <Nav />
 
   <slot />
@@ -33,6 +35,7 @@ const {
 
   <script is:inline src="/js/nav.js"></script>
   <script is:inline src="/js/glitch.js"></script>
+  <script is:inline src="/js/city-bg.js"></script>
   <slot name="scripts" />
 
 </body>

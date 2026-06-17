@@ -50,6 +50,16 @@ body {
   min-height: 100vh;
 }
 
+/* City background canvas */
+#city-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
 /* Scanlines overlay */
 body::after {
   content: '';
