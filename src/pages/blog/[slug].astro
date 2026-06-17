@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Badge from '../../components/Badge.astro';
+import '../../styles/blog.css';
+import '../../styles/post.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, date, readtime, featured, cover, tags, excerpt } = post.data;
+const { Content } = await render(post);
+---
+
+<Base title={`${title} — Ming-Han Lee`} description={excerpt}>
+  <main class="post-page container">
+
+    <a href="/blog" class="post__back">← Back to Blog</a>
+
+    <article class="post fade-up">
+
+      <header class="post__header">
+        <div class="post__tags">
+          {tags.map(t => <Badge label={t.label} color={t.color} />)}
+        </div>
+        <h1 class="post__title">{title}</h1>
+        <div class="post__meta">
+          <span>{date}</span>
+          <span class="post__meta-sep">·</span>
+          <span>{readtime}</span>
+        </div>
+      </header>
+
+      {cover && (
+        <div id="post-cover">
+          <img src={cover} alt={title} class="post__cover-img" />
+        </div>
+      )}
+
+      <div class="post__body">
+        <Content />
+      </div>
+
+    </article>
+
+  </main>
+</Base>

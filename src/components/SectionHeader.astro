@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  em?: string;
+  slashDeco?: boolean;
+}
+const { label, title, em, slashDeco = true } = Astro.props;
+---
+
+<header class="section-header fade-up">
+  <span class="section-label">{label}</span>
+  <h1 class="section-title">
+    {slashDeco && <span class="slash-deco">/</span>}{title}{em && <> <em>{em}</em></>}
+  </h1>
+  <div class="section-line"></div>
+</header>

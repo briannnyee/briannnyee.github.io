@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import '../../styles/blog.css';
+
+import siteData from '../../data/site.json';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => {
+  // Featured posts first, then by date descending
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return b.data.date.localeCompare(a.data.date);
+});
+
+const recentPosts = posts.slice(0, 4);
+const sidebarAbout = "I'm Ming-Han Lee — a builder at the seam of Machine Learning, Systems, and Robotics, with a Master's from ETH Zurich. I write about engineering, games, and the occasional reflection.";
+const topics = ["Robotics", "AI/ML", "Systems", "Tools", "Career", "Opinion", "Reflection"];
+---
+
+<Base title="Blog — Ming-Han Lee">
+  <main class="blog-page container">
+
+    <header class="section-header fade-up">
+      <span class="section-label">// BLOG.md</span>
+      <h1 class="section-title"><span class="slash-deco">/</span>Thoughts & <em>Writings</em></h1>
+      <div class="section-line"></div>
+    </header>
+
+    <div class="blog-layout">
+
+      <div class="post-list" id="post-list">
+        {posts.map(post => <PostCard post={post} />)}
+      </div>
+
+      <aside class="blog-sidebar fade-up">
+
+        <div class="sidebar-block sidebar-about">
+          <div class="sidebar-block__title">// ABOUT_ME</div>
+          <p>{sidebarAbout}</p>
+          <a href="/" class="btn btn--sm" style="margin-top:0.5rem">About Me ↗</a>
+        </div>
+
+        <div class="sidebar-block">
+          <div class="sidebar-block__title">// TOPICS</div>
+          <div class="tag-cloud">
+            {topics.map(t => <span class="tag-pill">{t}</span>)}
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <div class="sidebar-block__title">// RECENT_POSTS</div>
+          <div class="recent-list">
+            {recentPosts.map(p => (
+              <a class="recent-item" href={`/blog/${p.id}`}>
+                <span class="recent-item__title">{p.data.title}</span>
+                <span class="recent-item__date">{p.data.date}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+</Base>

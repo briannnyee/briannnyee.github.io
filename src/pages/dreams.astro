@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Badge from '../components/Badge.astro';
+import '../styles/dreams.css';
+
+import dreamsData from '../data/dreams.json';
+
+// Index by id for easy lookup
+const dreamsById: Record<string, any> = {};
+for (const d of dreamsData as any[]) dreamsById[d.id] = d;
+const moon = dreamsById['moon'];
+const robot = dreamsById['robot'];
+const infra = dreamsById['infra'];
+---
+
+<Base title="Dreams — Ming-Han Lee">
+  <div class="star-field" aria-hidden="true"></div>
+
+  <main class="dreams-page">
+    <div class="container">
+      <header class="dreams-header fade-up">
+        <span class="section-label">// DREAMS.manifest</span>
+        <h1 class="dreams-title">Life <em>Objectives</em></h1>
+        <p class="dreams-subtitle">Not a roadmap. Not a plan.<br>A north star.</p>
+      </header>
+    </div>
+
+    <!-- Dream 01 — Walk on the Moon -->
+    <div class="dream dream--moon fade-up">
+      <div class="dream__visual">
+        <div class="dream__visual-glow"></div>
+        <div class="moon-scene">
+          <div class="moon"></div>
+          <div class="earth"></div>
+          <div class="astronaut">🧑‍🚀</div>
+        </div>
+      </div>
+      <div class="dream__divider" aria-hidden="true"></div>
+      <div class="dream__text">
+        <div class="dream__number">{moon.number}</div>
+        <div class={`dream__status ${moon.statusClass}`}>
+          <span class="dream__status-dot"></span>
+          {moon.statusText}
+        </div>
+        <h2 class="dream__title">{moon.title}<em>{moon.titleEm}</em></h2>
+        <p class="dream__desc">{moon.desc}</p>
+        <div class="dream__tags">
+          {moon.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Dream 02 — Physical AI Practitioner -->
+    <div class="dream dream--robot fade-up">
+      <div class="dream__text">
+        <div class="dream__number">{robot.number}</div>
+        <div class={`dream__status ${robot.statusClass}`}>
+          <span class="dream__status-dot"></span>
+          {robot.statusText}
+        </div>
+        <h2 class="dream__title">{robot.title}<em>{robot.titleEm}</em></h2>
+        <p class="dream__desc">{robot.desc}</p>
+        <div class="dream__tags">
+          {robot.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+        </div>
+      </div>
+      <div class="dream__divider" aria-hidden="true"></div>
+      <div class="dream__visual">
+        <div class="dream__visual-glow"></div>
+        <div class="robot-scene">
+          <div class="robot-head"></div>
+          <div class="robot-body"></div>
+          <div class="node"></div>
+          <div class="node"></div>
+          <div class="node"></div>
+          <div class="node"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dream 03 — Large-Scale AI Infra Engineer -->
+    <div class="dream dream--infra fade-up">
+      <div class="dream__visual">
+        <div class="dream__visual-glow"></div>
+        <div class="infra-scene">
+          <div class="server-rack">
+            <div class="server-unit"><span class="server-label">GPU_CLUSTER_01 ████████ 98%</span></div>
+            <div class="server-unit"><span class="server-label">GPU_CLUSTER_02 ███████░ 87%</span></div>
+            <div class="server-unit"><span class="server-label">DIST_TRAINER_A ████████ 100%</span></div>
+            <div class="server-unit"><span class="server-label">DIST_TRAINER_B ██████░░ 75%</span></div>
+            <div class="server-unit"><span class="server-label">STORAGE_NODE_1 ████░░░░ 52%</span></div>
+            <div class="server-unit"><span class="server-label">NETWORK_FABRIC ████████ 99%</span></div>
+          </div>
+          <div class="data-flow">
+            <div class="data-packet"></div>
+            <div class="data-packet"></div>
+            <div class="data-packet"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dream__divider" aria-hidden="true"></div>
+      <div class="dream__text">
+        <div class="dream__number">{infra.number}</div>
+        <div class={`dream__status ${infra.statusClass}`}>
+          <span class="dream__status-dot"></span>
+          {infra.statusText}
+        </div>
+        <h2 class="dream__title">{infra.title}<em>{infra.titleEm}</em></h2>
+        <p class="dream__desc">{infra.desc}</p>
+        <div class="dream__tags">
+          {infra.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="dreams-cta fade-up">
+        <p class="dreams-cta__quote">
+          "The people who are crazy enough to think they can change the world<br>
+          <strong>are the ones who do.</strong>"
+        </p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+          <a href="/milestones" class="btn">[ View Progress ]</a>
+          <a href="/projects" class="btn btn--cyan">[ See the Work ]</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</Base>

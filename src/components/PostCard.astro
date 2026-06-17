@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Badge from './Badge.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, date, readtime, featured, tags, excerpt } = post.data;
+const url = `/blog/${post.id}`;
+---
+
+<a class:list={['post-card', 'fade-up', { 'post-card--featured': featured }]} href={url}>
+  {featured && <div class="featured-label">FEATURED POST</div>}
+  <div class="post-card__meta">
+    <span class="post-card__date">{date}</span>
+    <span class="post-card__readtime">{readtime}</span>
+    <div class="post-card__tags">
+      {tags.map(t => <Badge label={t.label} color={t.color} />)}
+    </div>
+  </div>
+  <h2 class="post-card__title">{title}</h2>
+  <p class="post-card__excerpt">{excerpt}</p>
+  <span class="post-card__link">Read Article</span>
+</a>

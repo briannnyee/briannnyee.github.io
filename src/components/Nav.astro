@@ -1,0 +1,34 @@
+---
+const pathname = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+---
+
+<nav class="nav">
+  <a href="/" class="nav__logo">MHL<span>.</span></a>
+  <ul class="nav__links">
+    <li><a href="/" class:list={[{ active: isActive('/') }]}>Home</a></li>
+    <li><a href="/projects" class:list={[{ active: isActive('/projects') }]}>Projects</a></li>
+    <li><a href="/milestones" class:list={[{ active: isActive('/milestones') }]}>Milestones</a></li>
+    <li><a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a></li>
+    <li><a href="/games" class:list={[{ active: isActive('/games') }]}>Games</a></li>
+    <li><a href="/dreams" class:list={[{ active: isActive('/dreams') }]}>Dreams</a></li>
+    <li><a href="https://github.com/briannnyee" target="_blank" rel="noopener">GitHub ↗</a></li>
+  </ul>
+  <button class="nav__hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav__mobile">
+  <a href="/">Home</a>
+  <a href="/projects">Projects</a>
+  <a href="/milestones">Milestones</a>
+  <a href="/blog">Blog</a>
+  <a href="/games">Games</a>
+  <a href="/dreams">Dreams</a>
+  <a href="https://github.com/briannnyee" target="_blank" rel="noopener">GitHub ↗</a>
+</div>

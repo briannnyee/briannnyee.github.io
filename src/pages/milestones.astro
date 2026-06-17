@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Badge from '../components/Badge.astro';
+import '../styles/projects.css';
+import '../styles/milestones.css';
+
+import milestonesData from '../data/milestones.json';
+---
+
+<Base title="Milestones — Ming-Han Lee">
+  <main class="milestones-page container">
+
+    <header class="section-header fade-up">
+      <span class="section-label">// MILESTONES.timeline</span>
+      <h1 class="section-title"><span class="slash-deco">/</span>The <em>Journey</em></h1>
+      <div class="section-line"></div>
+    </header>
+
+    <div class="milestone-filters filter-bar fade-up" id="milestone-filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="education">Education</button>
+      <button class="filter-btn" data-cat="work">Work</button>
+      <button class="filter-btn" data-cat="award">Awards</button>
+      <button class="filter-btn" data-cat="cert">Certifications</button>
+      <button class="filter-btn" data-cat="launch">Launches</button>
+    </div>
+
+    <div class="timeline" id="timeline">
+      {(milestonesData as any[]).map(group => (
+        <>
+          <div class="timeline-year">
+            <span class="timeline-year__label">{group.year}</span>
+          </div>
+          {group.entries.map((e: any) => {
+            const card = (
+              <div class="milestone__card">
+                <div class="milestone__header">
+                  <span class="milestone__date">{e.date}</span>
+                  <span class="milestone__cat-badge">{e.categoryLabel}</span>
+                </div>
+                <div class="milestone__title">{e.title}</div>
+                <div class="milestone__org">{e.org}</div>
+                <div class="milestone__body">
+                  {e.body.map((p: string) => <p>{p}</p>)}
+                </div>
+                <div class="milestone__tags">
+                  {e.tags.map((t: any) => <Badge label={t.label} color={t.color} />)}
+                </div>
+              </div>
+            );
+            const dot = (
+              <div class="milestone__dot">
+                <div class="milestone__dot-icon">{e.icon}</div>
+              </div>
+            );
+            const empty = <div class="milestone__empty"></div>;
+
+            return (
+              <div class="milestone fade-up" data-cat={e.category}>
+                {e.side === 'right' ? <>{empty}{dot}{card}</> : <>{card}{dot}{empty}</>}
+              </div>
+            );
+          })}
+        </>
+      ))}
+      <div class="timeline-end"><div class="timeline-end__dot"></div></div>
+    </div>
+
+  </main>
+
+  <script is:inline>
+    (function() {
+      var milestones = document.querySelectorAll('.milestone[data-cat]');
+      document.querySelectorAll('#milestone-filters .filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('#milestone-filters .filter-btn').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          btn.classList.add('active');
+          var cat = btn.dataset.cat;
+          milestones.forEach(function(m) {
+            m.classList.toggle('hidden', cat !== 'all' && m.dataset.cat !== cat);
+          });
+          document.querySelectorAll('.timeline-year').forEach(function(yr) {
+            var next = yr.nextElementSibling;
+            var hasVisible = false;
+            while (next && !next.classList.contains('timeline-year') && !next.classList.contains('timeline-end')) {
+              if (next.classList.contains('milestone') && !next.classList.contains('hidden')) hasVisible = true;
+              next = next.nextElementSibling;
+            }
+            yr.style.display = hasVisible ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</Base>

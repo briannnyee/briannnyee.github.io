@@ -1,0 +1,175 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Badge from '../components/Badge.astro';
+import '../styles/index.css';
+import '../styles/dreams.css';
+
+import siteData from '../data/site.json';
+import projectsData from '../data/projects.json';
+import gamesData from '../data/games.json';
+
+const posts = await getCollection('blog');
+
+// Compute hero stats (mirrors original load-index.js logic)
+const projectCount = projectsData.length;
+const blogCount = posts.length;
+const gamesPlayed = (gamesData as any).games.filter((g: any) => g.status !== 'backlog').length;
+const counts: Record<string, number> = { projects: projectCount, blog: blogCount, games: gamesPlayed };
+
+const resolvedStats = siteData.hero.stats.map((s: any) => ({
+  label: s.label,
+  value: s.source ? (counts[s.source] ?? 0) : s.value,
+}));
+---
+
+<Base title="MING-HAN LEE — Portfolio">
+  <!-- Animated grid background -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero__inner">
+
+      <div class="hero__left">
+        <div class="hero__eyebrow">{siteData.hero.eyebrow}</div>
+
+        <div class="glitch-wrap fade-up">
+          <h1 class="glitch" data-text="MING-HAN">MING-HAN</h1><br>
+          <h1 class="glitch" data-text="LEE">LEE</h1>
+        </div>
+
+        <p class="hero__name-sub fade-up">Robotics & AI Engineer</p>
+
+        <div class="typewriter-wrap fade-up">
+          <span class="typewriter-prompt">&gt;&nbsp;</span>
+          <span id="typewriter"></span>
+          <span class="cursor"></span>
+        </div>
+
+        <div class="hero__cta fade-up">
+          <a href="/projects" class="btn">[ VIEW PROJECTS ]</a>
+          <a href="/blog" class="btn btn--cyan">[ READ BLOG ]</a>
+        </div>
+
+        <div class="hero__stats fade-up" id="hero-stats">
+          {resolvedStats.map(s => (
+            <div class="stat">
+              <span class="stat__value" data-count={s.value}>0</span>
+              <span class="stat__label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hero__photo-wrap fade-up">
+        <div class="hero__photo-frame">
+          <img
+            src="/assets/photo.jpg"
+            alt="Ming-Han Lee"
+            class="hero__photo-img"
+            onerror="this.style.display='none'; this.parentElement.querySelector('.hero__photo-placeholder').style.display='flex';"
+          />
+          <div class="hero__photo-placeholder">
+            <span class="placeholder-icon">◈</span>
+            <span class="placeholder-text">PHOTO.jpg</span>
+            <span class="placeholder-sub">Replace assets/photo.jpg</span>
+          </div>
+          <div class="photo-scan" aria-hidden="true"></div>
+          <div class="photo-corner photo-corner--tl" aria-hidden="true"></div>
+          <div class="photo-corner photo-corner--tr" aria-hidden="true"></div>
+          <div class="photo-corner photo-corner--bl" aria-hidden="true"></div>
+          <div class="photo-corner photo-corner--br" aria-hidden="true"></div>
+          <div class="photo-label" aria-hidden="true">ID::MHL_2026</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-hint__chevron"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about container">
+    <div class="about__grid">
+      <div class="about__text fade-up">
+        <span class="section-label">// ABOUT.exe</span>
+        <h2 class="section-title">Bridging Algorithms and Action: Engineering the <em>Future</em> of AI in Robotics</h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+
+        <div id="about-bio">
+          {siteData.about.bio.map(p => <p set:html={p} />)}
+        </div>
+
+        <div class="about__skills" id="about-skills">
+          {siteData.about.skills.map(s => <Badge label={s.label} color={s.color as any} />)}
+        </div>
+      </div>
+
+      <div class="about__visual fade-up">
+        <div class="about__card corner-box">
+          <div class="about__card-label">SYSTEM INFO</div>
+          <div id="about-system-info">
+            {siteData.about.systemInfo.map((row: any) => (
+              <div class="about__stat-row">
+                <span class="about__stat-key">{row.key}</span>
+                <span class="about__stat-val">
+                  {row.href
+                    ? <a href={row.href} target="_blank" style="color:var(--cyan)">{row.value}</a>
+                    : row.color
+                      ? <span style={`color:var(--${row.color})`}>{row.value}</span>
+                      : row.value
+                  }
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dream teaser -->
+  <section class="container fade-up">
+    <a href="/dreams" class="dream-teaser" style="text-decoration:none; color:inherit;">
+      <div class="dream-teaser__left">
+        <span class="dream-teaser__icon">🌕</span>
+        <div>
+          <div class="dream-teaser__label">// DREAMS.manifest</div>
+          <div class="dream-teaser__title">Walk on the Moon &nbsp;·&nbsp; Physical AI &nbsp;·&nbsp; AI Infra at Scale</div>
+        </div>
+      </div>
+      <span class="btn btn--cyan" style="pointer-events:none; flex-shrink:0;">[ VIEW DREAMS ]</span>
+    </a>
+  </section>
+
+  <script is:inline>
+    // Typewriter — runs after glitch.js is loaded by Base.astro
+    (function() {
+      var phrases = ["Frontier Physical AI","Learning-Based Robotics Control","Distributed System","ML Infrastructure","System Optimization"];
+      var el = document.getElementById('typewriter');
+      if (!el) return;
+      var pIdx = 0, cIdx = 0, deleting = false;
+      var SPEED_TYPE = 80, SPEED_DEL = 45, PAUSE = 1800;
+      function tick() {
+        var phrase = phrases[pIdx];
+        if (!deleting) {
+          el.textContent = phrase.slice(0, cIdx + 1);
+          cIdx++;
+          if (cIdx === phrase.length) { deleting = true; setTimeout(tick, PAUSE); return; }
+          setTimeout(tick, SPEED_TYPE);
+        } else {
+          el.textContent = phrase.slice(0, cIdx - 1);
+          cIdx--;
+          if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; setTimeout(tick, 300); return; }
+          setTimeout(tick, SPEED_DEL);
+        }
+      }
+      setTimeout(tick, 800);
+      if (window.GlitchUtils) window.GlitchUtils.setupCounters();
+    })();
+  </script>
+</Base>

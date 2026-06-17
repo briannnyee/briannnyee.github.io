@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Badge from '../components/Badge.astro';
+import '../styles/projects.css';
+
+import projectsData from '../data/projects.json';
+
+// Build unique category list preserving insertion order
+const seen = new Set<string>();
+const categories: { key: string; label: string }[] = [];
+for (const p of projectsData as any[]) {
+  if (p.category && !seen.has(p.category)) {
+    seen.add(p.category);
+    categories.push({ key: p.category, label: p.categoryLabel || p.category });
+  }
+}
+---
+
+<Base title="Projects — Ming-Han Lee">
+  <main class="projects-page container">
+
+    <header class="section-header fade-up">
+      <span class="section-label">// PROJECTS.log</span>
+      <h1 class="section-title"><span class="slash-deco">/</span>What I've <em>Built</em></h1>
+      <div class="section-line"></div>
+    </header>
+
+    <div class="filter-bar fade-up" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      {categories.map(c => (
+        <button class="filter-btn" data-filter={c.key}>{c.label}</button>
+      ))}
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      {(projectsData as any[]).map(p => (
+        <article
+          class:list={['project-card', 'fade-up', { 'project-card--featured': p.featured }]}
+          data-category={p.category}
+          style={`--accent-color:${p.accentColor}`}
+        >
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__category">{p.categoryLabel}</span>
+              <span class="card__year">{p.year}</span>
+            </div>
+            <h2 class="card__title">{p.title}</h2>
+            <p class="card__desc">{p.desc}</p>
+            <div class="card__stack">
+              {p.stack.map((s: any) => <Badge label={s.label} color={s.color} />)}
+            </div>
+            <div class="card__links">
+              {p.links.map((l: any) => {
+                const isExternal = l.href.startsWith('http');
+                return (
+                  <a
+                    href={l.href}
+                    class={`btn btn--sm ${l.variant || ''}`}
+                    {...(isExternal ? { target: '_blank', rel: 'noopener' } : {})}
+                  >
+                    {l.label}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="fade-up" style="margin-top:3rem; text-align:center;">
+      <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--muted); letter-spacing:0.15em; margin-bottom:1.25rem;">
+        // LOOKING FOR CAREER HIGHLIGHTS & ACHIEVEMENTS?
+      </p>
+      <a href="/milestones" class="btn btn--cyan">[ VIEW MILESTONES TIMELINE ]</a>
+    </div>
+
+  </main>
+
+  <script is:inline>
+    (function() {
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var cards = document.querySelectorAll('.project-card');
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var filter = btn.dataset.filter;
+          cards.forEach(function(card) {
+            var match = filter === 'all' || card.dataset.category === filter;
+            card.style.display = match ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</Base>
