@@ -224,29 +224,33 @@ flatMilestones.forEach((m: any, i: number) => {
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setSize(window.innerWidth, window.innerHeight);
+      // Semi-opaque dark background so the 3D scene pops over city-bg
+      renderer.setClearColor(0x010812, 0.92);
 
       // ── Scene + fog ─────────────────────────────────────────────────────
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x000000, 0.004);
+      scene.fog = new THREE.FogExp2(0x010812, 0.005);
 
       // ── Camera ──────────────────────────────────────────────────────────
       const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1200);
-      camera.position.set(0, 2, CAM_START);
+      camera.position.set(0, 5, CAM_START);
 
       // ── Lights ──────────────────────────────────────────────────────────
-      scene.add(new THREE.AmbientLight(0x111122, 0.5));
-      const dirLight = new THREE.DirectionalLight(0x00F5FF, 0.15);
+      scene.add(new THREE.AmbientLight(0x001122, 0.8));
+      const dirLight = new THREE.DirectionalLight(0x00F5FF, 0.3);
       dirLight.position.set(0, 50, 0);
       scene.add(dirLight);
 
       // ── Grid floor ──────────────────────────────────────────────────────
-      const gridBase = new THREE.GridHelper(1200, 100, 0x0d1a00, 0x0d1a00);
+      // Fine subdivision grid — dark cyan
+      const gridBase = new THREE.GridHelper(1200, 80, 0x003344, 0x001a22);
       gridBase.position.y = -10;
       scene.add(gridBase);
 
-      const gridCenter = new THREE.GridHelper(1200, 8, 0x3a3500, 0x1a1a00);
-      gridCenter.position.y = -9.9;
-      scene.add(gridCenter);
+      // Main grid — bright neon cyan lines
+      const gridMain = new THREE.GridHelper(1200, 10, 0x00F5FF, 0x005566);
+      gridMain.position.y = -9.95;
+      scene.add(gridMain);
 
       // Center runway line
       const runwayLen = Math.abs(CAM_END) + 60;
@@ -264,7 +268,7 @@ flatMilestones.forEach((m: any, i: number) => {
         new THREE.Vector3(0, 0, CAM_END - 10),
       ];
       const spineCurve = new THREE.CatmullRomCurve3(spineCtrlPts);
-      const spineMat = new THREE.LineBasicMaterial({ color: 0xFCEE09, transparent: true, opacity: 0.25 });
+      const spineMat = new THREE.LineBasicMaterial({ color: 0xFCEE09, transparent: true, opacity: 0.45 });
       const spineLine = new THREE.Line(
         new THREE.BufferGeometry().setFromPoints(spineCurve.getPoints(200)),
         spineMat
@@ -442,7 +446,8 @@ flatMilestones.forEach((m: any, i: number) => {
         // Smooth camera Z
         currentCamZ += (targetCamZ - currentCamZ) * (1 - Math.exp(-8 * delta));
         camera.position.z = currentCamZ;
-        camera.lookAt(0, 0, currentCamZ - 30);
+        // Look slightly ahead and slightly downward toward the grid floor
+        camera.lookAt(0, -3, currentCamZ - 40);
 
         // Rotate + pulse markers
         markers.forEach((mesh, i) => {
@@ -456,7 +461,7 @@ flatMilestones.forEach((m: any, i: number) => {
           }
         });
 
-        spineMat.opacity = 0.2 + 0.08 * Math.sin(now * 0.001);
+        spineMat.opacity = 0.35 + 0.12 * Math.sin(now * 0.001);
 
         updateCards(currentCamZ);
         updateHUD(scrollProgress, currentCamZ);
